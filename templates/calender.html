@@ -1,0 +1,51 @@
+{% extends "layout.html" %} 
+{% block content %} 
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
+</head>
+
+<body>
+    <div id="calendar"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+    
+            var events = [
+                {% for event in data %}
+                {
+                    title: '{{ event.title }}',
+                    start: '{{ event.start }}',
+                    {% if event.title.startswith("使") %}
+                    color: "blue",
+                    {% else %}
+                    color: "red",
+                    {% endif %}
+                },
+                {% endfor %}
+            ];
+    
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: events
+            });
+            calendar.render();
+        });
+    </script>
+    <h1>
+        <a href="/scan2">スキャン</a>
+        <br>
+        <a href="/logout">ログアウト</a>
+        <br>
+        <a href="/save">データを見る</a>
+        <br>
+        <a href="/calender_data">記録Calender</a>
+    </h1>
+
+</body>
+
+{% endblock %}
+
+
+

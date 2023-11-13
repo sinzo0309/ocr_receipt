@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<center>
+    <h1>
+        会計{{result}}円です。
+    </h1>
+    <img src= "{{ img_path }}" style="margin: 20px; vertical-align: bottom; width: 200px;">
+    <form method="POST" action="/create">
+        <input type="hidden" name="result" value="{{result}}">
+        <button type="submit">保存する</button>
+        
+    </form>
+    <h1><a href="/scan2">もう一度読み込む</a></h1>
+</center>
+{% endblock %}
+
+

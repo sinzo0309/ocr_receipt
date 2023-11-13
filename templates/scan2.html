@@ -1,0 +1,111 @@
+{% extends "layout.html" %} 
+{% block content %} 
+
+    <body>
+    <video id="video" width="300" height="480" autoplay></video>
+    <button id="snap">Snap Photo</button>
+    <canvas id="canvas" width="300" height="480"></canvas>
+
+    <div class="enter_btn">
+        <h2>レシートの写真をアップロードしてください</h2>
+        <form action = "/upload" method="POST" enctype="multipart/form-data">
+            <p><input type="file" id = "upload_file" name = "upload_file" multiple="multiple" class="form-control"></p>
+            <p><input type="submit" value="送信" class="form-control btn btn-primary"></p>
+        </form>
+        
+    </div>
+    <h1>
+        <a href="/logout">ログアウト</a>
+        <br>
+        <a href="/save">保存したデータを見る</a>
+    </h1>
+
+    </body>
+
+    <script>
+    // カメラの設定
+    var constraints = { video: { width: 300, height: 480 } }; 
+    
+    // video要素の取得
+    var video = document.querySelector('#video');
+    
+    // ユーザーのデバイスによるメディアストリームの取得
+    navigator.mediaDevices.getUserMedia(constraints)
+    .then(function(mediaStream) {
+      video.srcObject = mediaStream;
+      video.onloadedmetadata = function(e) {
+        video.play();
+      };
+    })
+    .catch(function(err) { console.log(err.name + ": " + err.message); });
+
+    // canvas要素の取得
+    var canvas = document.querySelector('#canvas');
+    var context = canvas.getContext('2d');
+    var snap = document.querySelector("#snap");
+    var scan = document.querySelector("#scan");
+    
+    // Snapボタンをクリックしたときのイベントハンドラ
+    //snap.addEventListener("click", function() {
+        // context.drawImage(video, 0, 0, 640, 480);
+    // });
+    snap.addEventListener("click", function() {
+    context.drawImage(video, 0, 0, 300, 480);
+    canvas.toBlob(function(blob) {
+        var formData = new FormData();
+        formData.append('upload_file', blob, 'レシート.png');
+
+        fetch('/upload1', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('エラーが発生しました: ' + error);
+        });
+    }, 'image/png');
+    });
+
+    </script>
+
+{% endblock %}
+
+
+
+
+<!--      -->
+
+<!-- snap.addEventListener("click", function() {
+    context.drawImage(video, 0, 0, 640, 480);
+    canvas.toBlob(function(blob) {
+        // 新しいフォームデータオブジェクトを作成
+        var formData = new FormData();
+        formData.append('upload_file', blob, 'レシート.png');
+
+        // 新しいフォーム要素を作成
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/upload1';
+        form.enctype = 'multipart/form-data';
+        form.style.display = 'none';  // フォームを表示しない
+
+        // フォームデータをフォームに追加
+        for (var pair of formData.entries()) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = pair[0];
+            input.value = pair[1];
+            form.appendChild(input);
+        }
+
+        // フォームをDOMに追加
+        document.body.appendChild(form);
+
+        // フォームを送信
+        form.submit();
+    }, 'image/png');
+    });
+ -->
