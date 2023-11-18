@@ -1,0 +1,43 @@
+.header-nav-container{
+    background-size: cover;
+    width: 100%;
+    height: 30px;
+    background-color:black;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+nav {margin-right: 5%;
+}
+
+.aaa {
+    color: #fff;
+    text-decoration: none;
+  }
+
+
+.aaa:hover {
+    color: #f00;
+  }
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    height: 50px;
+    width: 100%;
+    background-color: #000;
+    font-size: 15px;
+    color: #fff;
+  }
+  
+  
+  .center_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

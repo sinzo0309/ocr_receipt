@@ -1,13 +1,36 @@
-{% extends "layout2.html" %} 
+{% extends "layout_login.html" %} 
 {% block content %} 
 
 <h1>新規登録</h1>
-<form action = "/signup" ,  method = "POST">
+<form  action = "/signup", method = "POST">
+  <div> 
     <label for="username">ユーザー名</label>
+
     <input type = "text" name = "username">
+    <br>
+    <br>    
     <label for="password">パスワード</label>
     <input type="password" name="password">
-    <input class = center-button type="submit" value="登録">
+    <br>
+    <br>
+    <div class="input">
+      <h3>
+        <input type="submit" value="登録">
+      </h3>
+    </div>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+    <!-- <input type="submit" name="password"> -->
+</div>
 </form>
+
 {% endblock %}

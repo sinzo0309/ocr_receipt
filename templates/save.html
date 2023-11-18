@@ -2,7 +2,7 @@
 {% block content %} 
 
 <body>
-    <table border="1">
+    <table border="1" class="center_content">
         <tr>
             <!-- <th>id</th> -->
             <th>金額</th>
@@ -15,21 +15,14 @@
                 <td>{{save.cash}}</td>
                 <td>{{save.saved_at}}</td>
                 <td>
-                    <form method="POST" action="{{ url_for('delete', save_id=save.id) }}" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                    <form method="POST" action="{{ url_for('delete', save_id=save.id) }}" onsubmit="return confirm('削除してもよろしいですか?');">
                         <button type="submit">削除</button>
                     </form>
                 </td>
             </tr>
         {% endfor %}
     </table>
-    <h1>
-        <a href="/index">続けてレシートを記録する</a>
-        <br>
-        <a href="/logout">ログアウト</a>
-        <br>
-        <a href="/calender_data">記録Calendar</a>
-    </h1>
-    
+
 </body>
 
 {% endblock %}

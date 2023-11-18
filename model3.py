@@ -44,8 +44,8 @@ def detect_text(path):
 
     for text in texts[10:]:
         if (
-            y1 - 10 <= text.bounding_poly.vertices[0].y <= y2 + 10
-            or y1 - 10 <= text.bounding_poly.vertices[2].y <= y2 + 10
+            y1 - 5 <= text.bounding_poly.vertices[0].y <= y2 + 5
+            or y1 - 5 <= text.bounding_poly.vertices[2].y <= y2 + 5
         ):
             if "," in text.description:
                 Sum.append(text.description.replace(",", ""))

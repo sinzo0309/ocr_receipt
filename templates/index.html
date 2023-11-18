@@ -1,25 +1,21 @@
 {% extends "layout.html" %} 
-{% block content %} 
 
-<div class="enter_btn">
-    <h2>レシートの写真をアップロードしてください</h2>
+
+<div>
+    {% block content %} 
+    <h2 class="center_content">レシートの写真をアップロード</h2>
     <form action = "/upload" method="POST" enctype="multipart/form-data">
-        <p><input type="file" id = "upload_file" name = "upload_file" multiple="multiple" class="form-control"></p>
-        <p><input type="submit" value="送信" class="form-control btn btn-primary"></p>
+        <p class="center_content"><input type="file" id = "upload_file" name = "upload_file" multiple="multiple" ></p>
+        <br>
+        <p class="center_content"><input type="submit" value="アップロード" ></p>
     </form>
     
+    {% endblock %}
 </div>
 
 <h1>
-    <a href="/scan2">スキャン</a>
-    <br>
-    <a href="/logout">ログアウト</a>
-    <br>
-    <a href="/save">データを見る</a>
-    <br>
-    <a href="/calender_data">記録Calender</a>
 </h1>
 
-{% endblock %}
+class="center_content"
 
 

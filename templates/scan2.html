@@ -14,11 +14,6 @@
         </form>
         
     </div>
-    <h1>
-        <a href="/logout">ログアウト</a>
-        <br>
-        <a href="/save">保存したデータを見る</a>
-    </h1>
 
     </body>
 
@@ -45,10 +40,6 @@
     var snap = document.querySelector("#snap");
     var scan = document.querySelector("#scan");
     
-    // Snapボタンをクリックしたときのイベントハンドラ
-    //snap.addEventListener("click", function() {
-        // context.drawImage(video, 0, 0, 640, 480);
-    // });
     snap.addEventListener("click", function() {
     context.drawImage(video, 0, 0, 300, 480);
     canvas.toBlob(function(blob) {

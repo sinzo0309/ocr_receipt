@@ -78,19 +78,23 @@ def scan():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    if request.method == "POST":
-        # username = request.form.get("username")
-        # password = request.form.get("password ")
+    try:
+        if request.method == "POST":
+            # username = request.form.get("username")
+            # password = request.form.get("password ")
 
-        user = User(
-            username=request.form.get("username"),
-            password=generate_password_hash(request.form.get("password")),
-        )  # 256bitのランダムの数値を返す
+            user = User(
+                username=request.form.get("username"),
+                password=generate_password_hash(request.form.get("password")),
+            )  # 256bitのランダムの数値を返す
 
-        db.session.add(user)
-        db.session.commit()
-        return redirect("/login")
-    else:
+            db.session.add(user)
+            db.session.commit()
+            return redirect("/login")
+        else:
+            return render_template("signup.html")
+    except:
+        flash("そのユーザー名はすでに使用されています", "error")
         return render_template("signup.html")
 
 
@@ -125,27 +129,30 @@ def logout():
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
 def upload_user_files():
-    if request.method == "POST":
-        upload_file = request.files["upload_file"]
-        img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
-        upload_file.save(img_path)
-        result = detect_text(img_path)
-        return render_template("result.html", result=result, img_path=img_path)
-    else:
-        return render_template("/index")
+    try:
+        if request.method == "POST":
+            upload_file = request.files["upload_file"]
+            img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
+            upload_file.save(img_path)
+            result = detect_text(img_path)
+            return render_template("result.html", result=result, img_path=img_path)
+    except:
+        return render_template("index.html")
 
 
 @app.route("/upload1", methods=["GET", "POST"])
 @login_required
 def upload1_user_files():
-    if request.method == "POST":
-        upload_file = request.files["upload_file"]
-        img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
-        upload_file.save(img_path)
-        # result = detect_text(img_path)
-        return redirect("/index")
-    else:
-        return render_template("/index")
+    try:
+        if request.method == "POST":
+            upload_file = request.files["upload_file"]
+            img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
+            upload_file.save(img_path)
+            return redirect("/index")
+        else:
+            return render_template("/index")
+    except:
+        return render_template("scan2.html")
 
 
 @app.route("/create", methods=["GET", "POST"])
@@ -187,41 +194,47 @@ def save():
 def calendar_data():
     # データベースからデータを取得するクエリを実行
     # events = Save.query.all()
-    events = Save.query.filter_by(user_id=current_user.id).all()
+    try:
+        events = Save.query.filter_by(user_id=current_user.id).all()
 
-    # FullCalendarで必要な形式にデータを整形
-    data = []
-    date = events[0].saved_at.isoformat()[:10]
-    sum = 0
-    for event in events:
-        if date == event.saved_at.isoformat()[:10]:
-            sum += int(event.cash)
-        else:
+        # FullCalendarで必要な形式にデータを整形
+        data = []
+        date = events[0].saved_at.isoformat()[:10]
+        sum = 0
+        for event in events:
+            if date == event.saved_at.isoformat()[:10]:
+                sum += int(event.cash)
+            else:
+                data.append(
+                    {
+                        "title": f"合計使用額: {sum}円",
+                        "start": date,
+                        # ISO 8601形式で日時を表示
+                    }
+                )
+                date = event.saved_at.isoformat()[:10]
+                sum = int(event.cash)
+
             data.append(
                 {
-                    "title": f"合計使用額: {sum}円",
-                    "start": date,
+                    "title": f"使用金額: {event.cash}円",
+                    "start": event.saved_at.isoformat()[:10],
                     # ISO 8601形式で日時を表示
                 }
             )
-            date = event.saved_at.isoformat()[:10]
-            sum = int(event.cash)
-
         data.append(
             {
-                "title": f"使用金額: {event.cash}円",
-                "start": event.saved_at.isoformat()[:10],
+                "title": f"合計額: {sum}円",
+                "start": date,
                 # ISO 8601形式で日時を表示
             }
         )
-    data.append(
-        {
-            "title": f"合計額: {sum}円",
-            "start": date,
-            # ISO 8601形式で日時を表示
-        }
-    )
-    return render_template("calender.html", data=data)
+        if len(data) != 0:
+            return render_template("calender.html", data=data)
+        else:
+            return redirect(url_for("save"))
+    except:
+        return redirect(url_for("save"))
 
 
 @app.route("/delete/<int:save_id>", methods=["POST"])
