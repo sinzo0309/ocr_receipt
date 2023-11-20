@@ -24,8 +24,13 @@ def process_string(S):
 
 def detect_text(path):
     """Detects text in the file."""
+    # Vision APIへのリクエスト前にログを追加
+    print("Before Vision API request")
 
     client = vision.ImageAnnotatorClient()
+
+    # Vision APIへのリクエスト後にログを追加
+    print("After Vision API request")
 
     with open(path, "rb") as image_file:
         content = image_file.read()
