@@ -1,7 +1,7 @@
 # 以下実行後、リスタートが必要
 #!pip install --upgrade google-cloud-vision
 GOOGLE_CLOUD_VISION_API_URL = "https://vision.googleapis.com/v1/images:annotate?key="
-
+import json
 import os
 
 # from google.oauth2 import service_account
