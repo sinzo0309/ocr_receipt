@@ -1,9 +1,5 @@
-# 以下実行後、リスタートが必要
-#!pip install --upgrade google-cloud-vision
 from google.cloud import vision
 import sys
-
-GOOGLE_CLOUD_VISION_API_URL = "https://vision.googleapis.com/v1/images:annotate?key="
 
 from google.oauth2 import service_account
 from collections import Counter
@@ -35,8 +31,6 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    # print(texts[0].description)
-    # print("Texts:")
     y2 = 0
     y1 = 0
     Sum = []

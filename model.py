@@ -2,8 +2,6 @@
 #!pip install --upgrade google-cloud-vision
 from google.cloud import vision
 
-GOOGLE_CLOUD_VISION_API_URL = "https://vision.googleapis.com/v1/images:annotate?key="
-
 from google.oauth2 import service_account
 from collections import Counter
 
@@ -85,19 +83,7 @@ def detect_text(path):
 
     n_sum = process_string(Sum)
 
-    """
-    for ele in Sum:
 
-        try:
-            n_sum.append(int(ele))
-        except:
-            for i in range(10):
-                if str(i) in ele:
-                    n_sum.append(make_num(ele))
-                    break
-            else:
-                continue
-    """
     n_sum.reverse()
     element_counts = Counter(n_sum)
     max_element, max_count = element_counts.most_common(1)[0]
@@ -107,4 +93,3 @@ def detect_text(path):
         return max(n_sum)
 
 
-# print(detect_text("/content/レシート８.jpg"))

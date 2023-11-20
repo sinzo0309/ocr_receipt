@@ -20,7 +20,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
 db = SQLAlchemy(app)
 
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -54,9 +53,6 @@ with app.app_context():
     # db.engine.execute("PRAGMA foreign_keys=on;")
     # Userテーブルを作成
     db.create_all()
-    # Saveテーブルを作成
-    # db.create_all()
-    # db.create_all()
 
 
 @login_manager.user_loader
@@ -129,14 +125,15 @@ def logout():
 @app.route("/upload", methods=["GET", "POST"])
 # @login_required
 def upload_user_files():
-    if request.method == "POST":
-        upload_file = request.files["upload_file"]
-        img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
-        upload_file.save(img_path)
-        result = detect_text(img_path)
-        return render_template("result.html", result=result, img_path=img_path)
-    # except:
-    # return render_template("index.html")
+    try:
+        if request.method == "POST":
+            upload_file = request.files["upload_file"]
+            img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
+            upload_file.save(img_path)
+            result = detect_text(img_path)
+            return render_template("result.html", result=result, img_path=img_path)
+    except:
+        return render_template("index.html")
 
 
 @app.route("/upload1", methods=["GET", "POST"])

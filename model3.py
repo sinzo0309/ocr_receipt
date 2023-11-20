@@ -1,15 +1,9 @@
-# 以下実行後、リスタートが必要
-#!pip install --upgrade google-cloud-vision
-GOOGLE_CLOUD_VISION_API_URL = "https://vision.googleapis.com/v1/images:annotate?key="
 import json
 import os
 
-# from google.oauth2 import service_account
-from collections import Counter
 from google.cloud import vision
 
 credentials_data = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-# key_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 
 def process_string(S):
@@ -31,12 +25,8 @@ def detect_text(path):
     try:
         credentials = json.loads(credentials_data)
         client = vision.ImageAnnotatorClient.from_service_account_info(credentials)
-    # ここに問題のあるコード
     except Exception as e:
-        # エラー発生時にログを出力
-        print(f"Error: {str(e)}")
-    # traceback.print_exc()
-    # client = vision.ImageAnnotatorClient()
+        return None
 
     with open(path, "rb") as image_file:
         content = image_file.read()
@@ -67,6 +57,4 @@ def detect_text(path):
                 Sum.append(text.description)
 
     n_sum = process_string(Sum)
-    print(n_sum)
-    print(max(n_sum))
     return max(n_sum)
