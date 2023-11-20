@@ -30,7 +30,7 @@ def detect_text(path):
     """Detects text in the file."""
     try:
         credentials = json.loads(credentials_data)
-        client = vision_v1.ImageAnnotatorClient.from_service_account_info(credentials)
+        client = vision.ImageAnnotatorClient.from_service_account_info(credentials)
         # client = vision.ImageAnnotatorClient()
         # client = vision.ImageAnnotatorClient.from_service_account_file(key_path)
     # ここに問題のあるコード
