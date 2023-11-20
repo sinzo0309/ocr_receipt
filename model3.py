@@ -2,10 +2,13 @@
 #!pip install --upgrade google-cloud-vision
 GOOGLE_CLOUD_VISION_API_URL = "https://vision.googleapis.com/v1/images:annotate?key="
 
+import os
 
-from google.oauth2 import service_account
+# from google.oauth2 import service_account
 from collections import Counter
 from google.cloud import vision
+
+key_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 
 def process_string(S):
@@ -25,7 +28,8 @@ def process_string(S):
 def detect_text(path):
     """Detects text in the file."""
     try:
-        client = vision.ImageAnnotatorClient()
+        # client = vision.ImageAnnotatorClient()
+        client = vision.ImageAnnotatorClient.from_service_account_file(key_path)
     # ここに問題のあるコード
     except Exception as e:
         # エラー発生時にログを出力
