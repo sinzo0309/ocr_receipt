@@ -8,7 +8,8 @@ import os
 from collections import Counter
 from google.cloud import vision
 
-key_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+credentials_data = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+# key_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 
 def process_string(S):
@@ -28,8 +29,10 @@ def process_string(S):
 def detect_text(path):
     """Detects text in the file."""
     try:
+        credentials = json.loads(credentials_data)
+        client = vision_v1.ImageAnnotatorClient.from_service_account_info(credentials)
         # client = vision.ImageAnnotatorClient()
-        client = vision.ImageAnnotatorClient.from_service_account_file(key_path)
+        # client = vision.ImageAnnotatorClient.from_service_account_file(key_path)
     # ここに問題のあるコード
     except Exception as e:
         # エラー発生時にログを出力
