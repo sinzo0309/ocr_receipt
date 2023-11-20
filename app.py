@@ -123,7 +123,7 @@ def logout():
 
 
 @app.route("/upload", methods=["GET", "POST"])
-# @login_required
+@login_required
 def upload_user_files():
     try:
         if request.method == "POST":
@@ -137,7 +137,7 @@ def upload_user_files():
 
 
 @app.route("/upload1", methods=["GET", "POST"])
-# @login_required
+@login_required
 def upload1_user_files():
     try:
         if request.method == "POST":
@@ -152,7 +152,7 @@ def upload1_user_files():
 
 
 @app.route("/create", methods=["GET", "POST"])
-# @login_required
+@login_required
 def create():
     # if request.method == "GET":
     # return render_template("create.html")
@@ -175,7 +175,7 @@ def create():
 
 
 @app.route("/save")
-# @login_required
+@login_required
 def save():
     # 全てのデータを取得
     # current_user = current_user
@@ -186,7 +186,7 @@ def save():
 
 
 @app.route("/calender_data")
-# @login_required
+@login_required
 def calendar_data():
     # データベースからデータを取得するクエリを実行
     # events = Save.query.all()
@@ -234,7 +234,7 @@ def calendar_data():
 
 
 @app.route("/delete/<int:save_id>", methods=["POST"])
-# @login_required
+@login_required
 def delete(save_id):
     save_to_delete = Save.query.get(save_id)
 
@@ -247,7 +247,7 @@ def delete(save_id):
 
 
 @app.route("/scan2")
-# @login_required
+@login_required
 def scan2():
     return render_template("scan2.html")
 
