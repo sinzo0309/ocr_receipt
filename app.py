@@ -47,6 +47,9 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(30), unique=True)
     password = db.Column(db.String(120), unique=True)
 
+    def change_password(self, new_password):
+        self.password = generate_password_hash(new_password)
+
 
 with app.app_context():
     # db.drop_all()  # テーブルを削除
@@ -250,6 +253,33 @@ def delete(save_id):
 @login_required
 def scan2():
     return render_template("scan2.html")
+
+
+# パスワードを変更する
+@app.route("/change_password", methods=["GET", "POST"])
+@login_required
+def change_password():
+    if request.method == "POST":
+        current_password = request.form.get("current_password")
+        new_password = request.form.get("new_password")
+        confirm_password = request.form.get("confirm_password")
+
+        if not check_password_hash(current_user.password, current_password):
+            flash("現在のパスワードが正しくありません", "error")
+            return render_template("change_password.html")
+
+        if new_password != confirm_password:
+            flash("新しいパスワードが一致しません", "error")
+            return render_template("change_password.html")
+
+        # Update the user's password
+        current_user.change_password(new_password)
+        db.session.commit()
+
+        flash("パスワードが変更されました", "success")
+        return redirect("/index")
+    else:
+        return render_template("change_password.html")
 
 
 if __name__ == "__main__":
