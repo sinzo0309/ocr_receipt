@@ -184,7 +184,7 @@ def create():
 
 
 @app.route("/save")
-@login_required
+# @login_required
 def save():
     # 全てのデータを取得
     # current_user = current_user
