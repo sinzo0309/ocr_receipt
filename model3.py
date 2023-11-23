@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 from google.cloud import vision
 
@@ -47,6 +48,9 @@ def detect_text(path):
             y1 - 5 <= text.bounding_poly.vertices[0].y <= y2 + 5
             or y1 - 5 <= text.bounding_poly.vertices[2].y <= y2 + 5
         ):
+            result = re.sub(r"\D", "", text.description)
+            Sum.append(result)
+            """
             if "," in text.description:
                 Sum.append(text.description.replace(",", ""))
             elif "." in text.description:
@@ -55,6 +59,7 @@ def detect_text(path):
                 Sum.append(text.description.replace(" ", ""))
             else:
                 Sum.append(text.description)
+            """
 
     n_sum = process_string(Sum)
     return max(n_sum)
