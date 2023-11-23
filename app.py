@@ -134,7 +134,11 @@ def upload_user_files():
         img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
         upload_file.save(img_path)
         result = detect_text(img_path)
-        return render_template("result.html", result=result, img_path=img_path)
+        if result == None:
+            flash("読み取りに失敗しました")
+            redirect("/upload1")
+        else:
+            return render_template("result.html", result=result, img_path=img_path)
 
 
 # except:
