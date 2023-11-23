@@ -161,7 +161,7 @@ def upload1_user_files():
 
 
 @app.route("/create", methods=["GET", "POST"])
-@login_required
+# @login_required
 def create():
     # if request.method == "GET":
     # return render_template("create.html")
