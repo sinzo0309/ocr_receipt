@@ -15,7 +15,7 @@
                 <td>{{save.cash}}円</td>
                 <!-- <td>{{save.saved_at}}</td> -->
                 <td>{{ save.saved_at.strftime('%Y年%m月%d日 %H:%M') }}</td>
-                td>
+                <td>
                     <a href="{{ url_for('edit', save_id=save.id) }}">編集</a>
                     <form method="POST" action="{{ url_for('delete', save_id=save.id) }}" onsubmit="return confirm('削除してもよろしいですか?');">
                         <button type="submit">削除</button>
