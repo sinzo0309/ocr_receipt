@@ -161,7 +161,7 @@ def upload1_user_files():
 
 
 @app.route("/create", methods=["GET", "POST"])
-# @login_required
+@login_required
 def create():
     # if request.method == "GET":
     # return render_template("create.html")
@@ -184,7 +184,7 @@ def create():
 
 
 @app.route("/save")
-# @login_required
+@login_required
 def save():
     # 全てのデータを取得
     # current_user = current_user
