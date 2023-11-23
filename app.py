@@ -255,6 +255,17 @@ def delete(save_id):
     return redirect(url_for("save"))  # /saveにリダイレクト
 
 
+@app.route("/edit/<int:save_id>", methods=["GET", "POST"])
+@login_required
+def edit(save_id):
+    save = Save.query.get(save_id)
+    if request.method == "POST":
+        save.cash = request.form["cash"]
+        db.session.commit()
+        return redirect(url_for("save"))
+    return render_template("edit.html", save=save)
+
+
 @app.route("/scan2")
 @login_required
 def scan2():
