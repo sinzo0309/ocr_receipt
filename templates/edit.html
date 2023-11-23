@@ -1,13 +1,16 @@
 <!-- edit.html -->
 {% extends "layout.html" %}
-{% block content %}
 
-<body>
-    <form method="POST">
-        <label for="cash">金額:</label>
-        <input type="text" id="cash" name="cash" value="{{ save.cash }}">
-        <input type="submit" value="更新">
-    </form>
-</body>
+<div>
+    {% block content %}
 
-{% endblock %}
+    <body>
+        <form method="POST">
+            <label for="cash">金額:</label>
+            <input type="text" id="cash" name="cash" value="{{ save.cash }}">
+            <input type="submit" value="更新">
+        </form>
+    </body>
+
+    {% endblock %}
+</div>
