@@ -50,7 +50,7 @@ def detect_text(path):
         ):
             result = re.sub(r"\D", "", text.description)
             Sum.append(result)
-            """
+            print(result)
             if "," in text.description:
                 Sum.append(text.description.replace(",", ""))
             elif "." in text.description:
@@ -59,7 +59,7 @@ def detect_text(path):
                 Sum.append(text.description.replace(" ", ""))
             else:
                 Sum.append(text.description)
-            """
+
     print(Sum)
     n_sum = process_string(Sum)
     return max(n_sum)
