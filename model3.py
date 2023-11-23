@@ -48,6 +48,7 @@ def detect_text(path):
             y1 - 5 <= text.bounding_poly.vertices[0].y <= y2 + 5
             or y1 - 5 <= text.bounding_poly.vertices[2].y <= y2 + 5
         ):
+            print(text.description)
             result = re.sub(r"\D", "", text.description)
             Sum.append(result)
             print(result)
