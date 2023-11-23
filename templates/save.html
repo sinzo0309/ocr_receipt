@@ -2,18 +2,19 @@
 {% block content %} 
 
 <body>
-    <table border="1" class="center_content">
+    <table border="1" class="table center_content">
         <tr>
             <!-- <th>id</th> -->
-            <th>金額</th>
-            <th>登録日時</th>
+            <th scope="col">金額</th>
+            <th scope="col">登録日時</th>
 
         </tr>
         {% for save in saves %}
-            <tr>
+            <tr class="table-primary">
                 <!-- <td>{{save.id}}</td> -->
                 <td>{{save.cash}}</td>
-                <td>{{save.saved_at}}</td>
+                <!-- <td>{{save.saved_at}}</td> -->
+                <td>{{ save.saved_at.strftime('%Y年%m月%d日 %H:%M') }}</td>
                 <td>
                     <form method="POST" action="{{ url_for('delete', save_id=save.id) }}" onsubmit="return confirm('削除してもよろしいですか?');">
                         <button type="submit">削除</button>
