@@ -60,6 +60,6 @@ def detect_text(path):
             else:
                 Sum.append(text.description)
             """
-
+    print(Sum)
     n_sum = process_string(Sum)
     return max(n_sum)
