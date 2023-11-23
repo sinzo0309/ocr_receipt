@@ -26,11 +26,6 @@ login_manager.init_app(app)
 UPLOAD_FOLDER = "./static/image"
 
 
-# db.Modelの使い方を理解して
-# save関数のところを修正
-# save.htmlも修正
-
-
 class Save(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     cash = db.Column(db.Integer, nullable=False)
@@ -45,7 +40,7 @@ class Save(db.Model):
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True)
-    password = db.Column(db.String(120), unique=True)
+    password = db.Column(db.String(120), unique=False)
 
     def change_password(self, new_password):
         self.password = generate_password_hash(new_password)

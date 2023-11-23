@@ -1,9 +1,6 @@
 <!-- edit.html -->
 {% extends "layout.html" %}
-
-<div>
-    {% block content %}
-
+{% block content %}
     <body>
         <form method="POST">
             <label for="cash">金額:</label>
@@ -11,6 +8,4 @@
             <input type="submit" value="更新">
         </form>
     </body>
-
-    {% endblock %}
-</div>
+{% endblock %}
