@@ -155,8 +155,6 @@ def upload1_user_files():
 @app.route("/create", methods=["GET", "POST"])
 @login_required
 def create():
-    # if request.method == "GET":
-    # return render_template("create.html")
     if request.method == "POST":
         result = int(request.form.get("result"))
         date = request.form.get("date")
@@ -166,6 +164,7 @@ def create():
         current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
         save = Save(
             cash=int(result),
+            username=current_user.username,
             user_id=current_user.id,
             saved_at=current_time,
             bought_at=date,
