@@ -127,7 +127,7 @@ def upload_user_files():
         upload_file = request.files["upload_file"]
         img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
         upload_file.save(img_path)
-        result = detect_text(img_path, 5)
+        result = detect_text(img_path)
         if result == None:
             flash("読み取りに失敗しました")
             redirect("/upload1")
