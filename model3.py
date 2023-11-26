@@ -41,6 +41,8 @@ def detect_text(path):
         if "合計" in text.description or "計" in text.description:
             y1 = text.bounding_poly.vertices[0].y
             y2 = text.bounding_poly.vertices[2].y
+        elif "年" in text.description and "月" in text.description and "日" in text.description:
+            date = text.description
     Sum = []
 
     for text in texts[10:]:
@@ -63,4 +65,4 @@ def detect_text(path):
 
     print(Sum)
     n_sum = process_string(Sum)
-    return max(n_sum)
+    return [max(n_sum),date]

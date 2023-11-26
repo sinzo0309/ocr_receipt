@@ -35,6 +35,7 @@ class Save(db.Model):
     saved_at = db.Column(
         db.DateTime, nullable=False, default=datetime.now(pytz.timezone("Asia/Tokyo"))
     )
+    bought_at = db.Column(db.String(20), nullable=False)
 
 
 class User(UserMixin, db.Model):
@@ -132,7 +133,9 @@ def upload_user_files():
             flash("読み取りに失敗しました")
             redirect("/upload1")
         else:
-            return render_template("result.html", result=result, img_path=img_path)
+            return render_template(
+                "result.html", result=result[0], date=result[1], img_path=img_path
+            )
 
 
 @app.route("/upload1", methods=["GET", "POST"])
@@ -157,6 +160,7 @@ def create():
     # return render_template("create.html")
     if request.method == "POST":
         result = int(request.form.get("result"))
+        date = request.form.get("date")
         # POSTリクエストからresultを取得
         # タイムゾーンを指定して現在の日時を取得
         # current_user = current_user
@@ -165,6 +169,7 @@ def create():
             cash=int(result),
             user_id=current_user.id,
             saved_at=current_time,
+            bought_at=date,
         )
         # saved_at=current_time
         # データベースに登録
