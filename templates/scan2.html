@@ -2,9 +2,9 @@
 {% block content %} 
 
     <body>
-    <video id="video" width="300" height="640" autoplay></video>
+    <video id="video" width="300" height="540" autoplay></video>
     <button id="snap">Snap Photo</button>
-    <canvas id="canvas" width="300" height="640"></canvas>
+    <canvas id="canvas" width="300" height="540"></canvas>
 
     <div class="enter_btn">
         <h2>レシートの写真をアップロードしてください</h2>
@@ -19,7 +19,7 @@
 
     <script>
     // カメラの設定
-    var constraints = { video: { width: 300, height: 640 } }; 
+    var constraints = { video: { width: 300, height: 540 } }; 
     
     // video要素の取得
     var video = document.querySelector('#video');
@@ -41,7 +41,7 @@
     var scan = document.querySelector("#scan");
     
     snap.addEventListener("click", function() {
-    context.drawImage(video, 0, 0, 300, 640);
+    context.drawImage(video, 0, 0, 300, 540);
     canvas.toBlob(function(blob) {
         var formData = new FormData();
         formData.append('upload_file', blob, 'レシート.png');
@@ -67,36 +67,3 @@
 
 
 
-<!--      -->
-
-<!-- snap.addEventListener("click", function() {
-    context.drawImage(video, 0, 0, 640, 480);
-    canvas.toBlob(function(blob) {
-        // 新しいフォームデータオブジェクトを作成
-        var formData = new FormData();
-        formData.append('upload_file', blob, 'レシート.png');
-
-        // 新しいフォーム要素を作成
-        var form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '/upload1';
-        form.enctype = 'multipart/form-data';
-        form.style.display = 'none';  // フォームを表示しない
-
-        // フォームデータをフォームに追加
-        for (var pair of formData.entries()) {
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = pair[0];
-            input.value = pair[1];
-            form.appendChild(input);
-        }
-
-        // フォームをDOMに追加
-        document.body.appendChild(form);
-
-        // フォームを送信
-        form.submit();
-    }, 'image/png');
-    });
- -->
