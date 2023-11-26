@@ -36,8 +36,9 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    print(texts[0].description)
+    # print(texts[0].description)
     for text in texts[1:]:
+        print(text.description)
         if "合計" in text.description or "計" in text.description:
             y1 = text.bounding_poly.vertices[0].y
             y2 = text.bounding_poly.vertices[2].y
@@ -55,10 +56,10 @@ def detect_text(path):
             y1 - 5 <= text.bounding_poly.vertices[0].y <= y2 + 5
             or y1 - 5 <= text.bounding_poly.vertices[2].y <= y2 + 5
         ):
-            print(text.description)
+            # print(text.description)
             result = re.sub(r"\D", "", text.description)
             Sum.append(result)
-            print(result)
+            # print(result)
             if "," in text.description:
                 Sum.append(text.description.replace(",", ""))
             elif "." in text.description:
@@ -68,6 +69,6 @@ def detect_text(path):
             else:
                 Sum.append(text.description)
 
-    print(Sum)
+    # print(Sum)
     n_sum = process_string(Sum)
     return [max(n_sum), date]
