@@ -10,7 +10,7 @@ from flask_login import (
     login_required,
     current_user,
 )
-
+from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import pytz  # タイムゾーンをインポート
@@ -19,6 +19,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -293,4 +294,7 @@ def change_password():
 
 
 if __name__ == "__main__":
+    os.system("python -m flask db init")
+    os.system("python -m flask db migrate -m 'Add bought_at column to Save table'")
+    os.system("python -m flask db upgrade")
     app.run(debug=True)
