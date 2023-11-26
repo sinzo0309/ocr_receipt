@@ -35,7 +35,7 @@ class Save(db.Model):
     saved_at = db.Column(
         db.DateTime, nullable=False, default=datetime.now(pytz.timezone("Asia/Tokyo"))
     )
-    bought_at = db.Column(db.String(20), nullable=False)
+    bought_at = db.Column(db.String(20), nullable=True)
 
 
 class User(UserMixin, db.Model):
