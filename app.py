@@ -123,21 +123,16 @@ def logout():
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
 def upload_user_files():
-    # try:
     if request.method == "POST":
         upload_file = request.files["upload_file"]
         img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
         upload_file.save(img_path)
-        result = detect_text(img_path)
+        result = detect_text(img_path, 5)
         if result == None:
             flash("読み取りに失敗しました")
             redirect("/upload1")
         else:
             return render_template("result.html", result=result, img_path=img_path)
-
-
-# except:
-# return render_template("index.html")
 
 
 @app.route("/upload1", methods=["GET", "POST"])
