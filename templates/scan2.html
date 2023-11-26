@@ -2,9 +2,9 @@
 {% block content %} 
 
     <body>
-    <video id="video" width="360" height="540" autoplay></video>
+    <video id="video" width="300" height="480" autoplay></video>
     <button id="snap">Snap Photo</button>
-    <canvas id="canvas" width="360" height="540"></canvas>
+    <canvas id="canvas" width="300" height="480"></canvas>
 
     <div class="enter_btn">
         <h2>レシートの写真をアップロードしてください</h2>
@@ -19,7 +19,7 @@
 
     <script>
     // カメラの設定
-    var constraints = { video: { width: 360, height: 540 } }; 
+    var constraints = { video: { width: 300, height: 480 } }; 
     
     // video要素の取得
     var video = document.querySelector('#video');
@@ -41,7 +41,7 @@
     var scan = document.querySelector("#scan");
     
     snap.addEventListener("click", function() {
-    context.drawImage(video, 0, 0, 360, 540);
+    context.drawImage(video, 0, 0, 300, 480);
     canvas.toBlob(function(blob) {
         var formData = new FormData();
         formData.append('upload_file', blob, 'レシート.png');
