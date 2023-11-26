@@ -47,6 +47,7 @@ def detect_text(path):
             or "日" in text.description
         ):
             date = text.description
+            print(date)
     Sum = []
 
     for text in texts[10:]:
