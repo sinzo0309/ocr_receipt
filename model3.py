@@ -37,7 +37,9 @@ def detect_text(path):
     response = client.text_detection(image=image)
     texts = response.text_annotations
     # print(texts[0].description)
+    date = ""
     for text in texts[1:]:
+        flag = True
         print(text.description)
         if "合計" in text.description or "計" in text.description:
             y1 = text.bounding_poly.vertices[0].y
@@ -46,8 +48,16 @@ def detect_text(path):
             "年" in text.description
             or "月" in text.description
             or "日" in text.description
+        ) and flag:
+            ydate1 = text.bounding_poly.vertices[0].y
+            ydate2 = text.bounding_poly.vertices[2].y
+            flag = False
+    for text in texts[1:]:
+        if (
+            ydate1 - 5 <= text.bounding_poly.vertices[0].y <= ydate2 + 5
+            or ydate1 - 5 <= text.bounding_poly.vertices[2].y <= ydate2 + 5
         ):
-            date = text.description
+            date += text.description
             print(date)
     Sum = []
 
