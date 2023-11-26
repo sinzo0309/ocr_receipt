@@ -41,7 +41,7 @@
     var scan = document.querySelector("#scan");
     
     snap.addEventListener("click", function() {
-    context.drawImage(video, 0, 0, 300, 540);
+    context.drawImage(video, 0, 0, 30, 54);
     canvas.toBlob(function(blob) {
         var formData = new FormData();
         formData.append('upload_file', blob, 'レシート.png');
