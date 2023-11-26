@@ -294,7 +294,4 @@ def change_password():
 
 
 if __name__ == "__main__":
-    os.system("python -m flask db init")
-    os.system("python -m flask db migrate -m 'Add bought_at column to Save table'")
-    os.system("python -m flask db upgrade")
     app.run(debug=True)
