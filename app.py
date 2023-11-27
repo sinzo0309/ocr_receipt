@@ -48,10 +48,7 @@ class User(UserMixin, db.Model):
 
 
 with app.app_context():
-    # db.drop_all()  # テーブルを削除
-    db.engine.execute("PRAGMA foreign_keys=on;")
     # Userテーブルを作成
-    db.create_all()
     db.create_all()
 
 
