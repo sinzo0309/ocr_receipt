@@ -166,7 +166,7 @@ def create():
             username=current_user.username,
             user_id=current_user.id,
             saved_at=current_time,
-            bought_at=date,
+            # bought_at=date,
         )
         # saved_at=current_time
         # データベースに登録
