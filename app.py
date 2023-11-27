@@ -19,12 +19,13 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 UPLOAD_FOLDER = "./static/image"
+migrate = Migrate(app, db)
 
 
 class Save(db.Model):
@@ -35,7 +36,7 @@ class Save(db.Model):
     saved_at = db.Column(
         db.DateTime, nullable=False, default=datetime.now(pytz.timezone("Asia/Tokyo"))
     )
-    bought_at = db.Column(db.String(20), nullable=True)
+    # bought_at = db.Column(db.String(20), nullable=True)
 
 
 class User(UserMixin, db.Model):
