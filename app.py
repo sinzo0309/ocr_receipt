@@ -1,4 +1,5 @@
 import os
+from sqlalchemy import MetaData
 from flask import Flask, request, render_template, redirect, url_for, flash
 from model3 import detect_text
 from flask_sqlalchemy import SQLAlchemy
@@ -15,17 +16,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import pytz  # タイムゾーンをインポート
 
+from alembic import op
+import sqlalchemy as sa
+
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
 db = SQLAlchemy(app)
 
-
 login_manager = LoginManager()
 login_manager.init_app(app)
-
 UPLOAD_FOLDER = "./static/image"
-migrate = Migrate(app, db)
+migrate = Migrate(app, db, render_as_batch=True)
+
+# revision identifiers, used by Alembic.
+revision = "7d514add877e"
+down_revision = None
+branch_labels = None
+depends_on = None
 
 
 class Save(db.Model):
@@ -36,7 +44,7 @@ class Save(db.Model):
     saved_at = db.Column(
         db.DateTime, nullable=False, default=datetime.now(pytz.timezone("Asia/Tokyo"))
     )
-    # bought_at = db.Column(db.String(40), nullable=True)
+    baught_at = db.Column(db.String(40), unique=True, nullable=True)
 
 
 class User(UserMixin, db.Model):
@@ -51,6 +59,7 @@ class User(UserMixin, db.Model):
 with app.app_context():
     # Userテーブルを作成
     db.create_all()
+    # db.drop_all()
 
 
 @login_manager.user_loader
@@ -157,7 +166,7 @@ def upload1_user_files():
 def create():
     if request.method == "POST":
         result = int(request.form.get("result"))
-        date = request.form.get("date")
+        baught_at = request.form.get("date")
         # POSTリクエストからresultを取得
         # タイムゾーンを指定して現在の日時を取得
         # current_user = current_user
@@ -167,7 +176,7 @@ def create():
             username=current_user.username,
             user_id=current_user.id,
             saved_at=current_time,
-            # bought_at=date,
+            baught_at=baught_at,
         )
         # saved_at=current_time
         # データベースに登録
