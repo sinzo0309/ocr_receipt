@@ -53,7 +53,6 @@ with app.app_context():
     # Userテーブルを作成
     db.create_all()
     db.create_all()
-    db.create_all()
 
 
 @login_manager.user_loader
