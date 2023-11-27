@@ -49,8 +49,10 @@ class User(UserMixin, db.Model):
 
 with app.app_context():
     # db.drop_all()  # テーブルを削除
-    # db.engine.execute("PRAGMA foreign_keys=on;")
+    db.engine.execute("PRAGMA foreign_keys=on;")
     # Userテーブルを作成
+    db.create_all()
+    db.create_all()
     db.create_all()
 
 
@@ -254,10 +256,14 @@ def delete(save_id):
 def edit(save_id):
     save = Save.query.get(save_id)
     if request.method == "POST":
-        save.cash = request.form["cash"]
-        db.session.commit()
-        return redirect(url_for("save"))
-    return render_template("edit.html", save=save)
+        if request.form["cash"] != save.cash and len(request.form["cash"]) != 0:
+            save.cash = request.form["cash"]
+            db.session.commit()
+            return redirect(url_for("save"))
+        else:
+            return redirect(url_for("save"))
+    else:
+        return render_template("edit.html", save=save)
 
 
 @app.route("/scan2")
