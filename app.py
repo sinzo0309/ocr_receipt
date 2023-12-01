@@ -271,12 +271,14 @@ def delete(save_id):
 def edit(save_id):
     save = Save.query.get(save_id)
     if request.method == "POST":
+        new_cash = request.form.get("cash")
+        new_baught_at = request.form.get("baught_at")
         if request.form["cash"] != save.cash and len(request.form["cash"]) != 0:
-            save.cash = request.form["cash"]
-            db.session.commit()
-            return redirect(url_for("save"))
-        else:
-            return redirect(url_for("save"))
+            save.cash = new_cash
+        if new_baught_at != save.baught_at:
+            save.baught_at = new_baught_at
+        db.session.commit()
+        return redirect(url_for("save"))
     else:
         return render_template("edit.html", save=save)
 
