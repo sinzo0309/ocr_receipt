@@ -169,7 +169,6 @@ def upload1_user_files():
         return render_template("scan2.html")
 
 
-"""
 @app.route("/create", methods=["GET", "POST"])
 @login_required
 def create():
@@ -198,6 +197,8 @@ def create():
         db.session.add(save)
         db.session.commit()
         return redirect(url_for("save"))  # /saveにリダイレク
+
+
 """
 
 
@@ -239,6 +240,7 @@ def create():
 
         db.session.commit()
         return redirect(url_for("save"))
+"""
 
 
 @app.route("/save")
