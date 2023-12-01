@@ -44,7 +44,7 @@ class Save(db.Model):
     saved_at = db.Column(
         db.DateTime, nullable=False, default=datetime.now(pytz.timezone("Asia/Tokyo"))
     )
-    baught_at = db.Column(db.String(40), unique=True, nullable=True)
+    # baught_at = db.Column(db.String(40), unique=True, nullable=True)
 
 
 class User(UserMixin, db.Model):
@@ -166,7 +166,7 @@ def upload1_user_files():
 def create():
     if request.method == "POST":
         result = int(request.form.get("result"))
-        baught_at = request.form.get("date")
+        # baught_at = request.form.get("date")
         # POSTリクエストからresultを取得
         # タイムゾーンを指定して現在の日時を取得
         # current_user = current_user
@@ -176,7 +176,7 @@ def create():
             username=current_user.username,
             user_id=current_user.id,
             saved_at=current_time,
-            baught_at=baught_at,
+            # baught_at=baught_at,
         )
         # saved_at=current_time
         # データベースに登録
