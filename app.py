@@ -179,9 +179,10 @@ def create():
         # current_user = current_user
         current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
         save = Save(
+            id=current_user.id,
             cash=int(result),
             username=current_user.username,
-            user_id=current_user.id,
+            user_id=current_user.user_id,
             saved_at=current_time,
             baught_at=baught_at,
         )
