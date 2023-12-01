@@ -84,4 +84,4 @@ def detect_text(path):
 
     # print(Sum)
     n_sum = process_string(Sum)
-    return [max(n_sum)]
+    return [max(n_sum), date]
