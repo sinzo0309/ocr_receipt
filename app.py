@@ -183,14 +183,23 @@ def create():
         current_logged_in_user = User.query.filter_by(
             username=current_user.username
         ).first()
-        save = Save(
-            # user_id=current_user.id,
-            user_id=current_logged_in_user.id,
-            cash=int(result),
-            # username=current_logged_in_user.username,
-            saved_at=current_time,
-            baught_at=baught_at,
-        )
+        if baught_at != None:
+            save = Save(
+                # user_id=current_user.id,
+                user_id=current_logged_in_user.id,
+                cash=int(result),
+                # username=current_logged_in_user.username,
+                saved_at=current_time,
+                baught_at=baught_at,
+            )
+        else:
+            save = Save(
+                # user_id=current_user.id,
+                user_id=current_logged_in_user.id,
+                cash=int(result),
+                # username=current_logged_in_user.username,
+                saved_at=current_time,
+            )
         # saved_at=current_time
         # データベースに登録
         db.session.add(save)
