@@ -1,7 +1,7 @@
 import os
 from sqlalchemy import MetaData
 from flask import Flask, request, render_template, redirect, url_for, flash
-from model3 import detect_text
+from model3 import detect_text, date_process
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import (
     UserMixin,
@@ -174,10 +174,12 @@ def create():
     if request.method == "POST":
         result = int(request.form.get("result"))
         baught_at = request.form.get("baught_at")
+        baught_at = date_process(baught_at)
         # POSTリクエストからresultを取得
         # タイムゾーンを指定して現在の日時を取得
         # current_user = current_user
         current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
+
         save = Save(
             user_id=current_user.id,
             cash=int(result),
