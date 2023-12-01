@@ -39,7 +39,7 @@ depends_on = None
 class Save(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     cash = db.Column(db.Integer, nullable=False)
-    username = db.Column(db.String(30), unique=True, nullable=False)
+    username = db.Column(db.String(30), unique=True, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     saved_at = db.Column(
         db.DateTime, nullable=True, default=datetime.now(pytz.timezone("Asia/Tokyo"))
