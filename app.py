@@ -44,7 +44,7 @@ class Save(db.Model):
     saved_at = db.Column(
         db.DateTime, nullable=False, default=datetime.now(pytz.timezone("Asia/Tokyo"))
     )
-    # baught_at = db.Column(db.String(40), unique=True, nullable=True)
+    baught_at = db.Column(db.String(40), unique=True, nullable=True)
 
 
 class User(UserMixin, db.Model):
