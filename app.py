@@ -179,8 +179,9 @@ def create():
         # タイムゾーンを指定して現在の日時を取得
         # current_user = current_user
         current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
-
+        current_user = User.query.filter_by(username=current_user.username).first()
         save = Save(
+            # user_id=current_user.id,
             user_id=current_user.id,
             cash=int(result),
             username=current_user.username,
