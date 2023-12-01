@@ -173,7 +173,7 @@ def upload1_user_files():
 def create():
     if request.method == "POST":
         result = int(request.form.get("result"))
-        baught_at = request.form.get("date")
+        baught_at = request.form.get("baught_at")
         # POSTリクエストからresultを取得
         # タイムゾーンを指定して現在の日時を取得
         # current_user = current_user
