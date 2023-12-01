@@ -221,11 +221,13 @@ def create():
 
         if existing_save:
             # 既存のデータがある場合は更新
+            print("existing!!")
             existing_save.cash = int(result)
             existing_save.saved_at = datetime.now(pytz.timezone("Asia/Tokyo"))
             existing_save.baught_at = baught_at
         else:
             # 既存のデータがない場合は新規作成
+            print("not existing!!")
             new_save = Save(
                 user_id=current_logged_in_user.id,
                 cash=int(result),
