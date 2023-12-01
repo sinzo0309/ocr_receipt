@@ -13,7 +13,7 @@
             <tr class="table-primary">
                 <td>{{save.cash}}円</td>
                 <td>{{ save.saved_at.strftime('%Y年%m月%d日 %H:%M') }}</td>
-                <td>{{ save.baught_at[:10]}}</td>
+                <td>{{ save.baught_at}}</td>
                 <td>
                     <a href="{{ url_for('edit', save_id=save.id) }}">編集</a>
                     <form method="POST" action="{{ url_for('delete', save_id=save.id) }}" onsubmit="return confirm('削除してもよろしいですか?');">
