@@ -141,9 +141,7 @@ def upload_user_files():
             flash("読み取りに失敗しました")
             redirect("/upload1")
         else:
-            return render_template(
-                "result.html", result=result[0], date=result[1], img_path=img_path
-            )
+            return render_template("result.html", result=result[0], img_path=img_path)
 
 
 @app.route("/upload1", methods=["GET", "POST"])
