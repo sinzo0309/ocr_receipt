@@ -11,11 +11,11 @@ def date_process(date):
     new_date = ""
     for i, term in enumerate(date):
         if term == "年":
-            new_date += date[i - 4 : i + 1]
+            new_date += date[i - 4 : i]
         elif term == "月":
-            new_date += date[i - 2 : i + 1]
+            new_date += date[i - 2 : i]
         elif term == "日":
-            new_date += date[i - 2 : i + 1]
+            new_date += date[i - 2 : i]
 
 
 def process_string(S):
