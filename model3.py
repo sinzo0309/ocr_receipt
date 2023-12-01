@@ -12,11 +12,11 @@ def date_process(date):
     for i, term in enumerate(date):
         try:
             if term == "年":
-                new_date += date[i - 4 : i]
+                new_date += date[i - 4 : i] + "年"
             elif term == "月":
-                new_date += date[i - 2 : i]
+                new_date += date[i - 2 : i] + "月"
             elif term == "日":
-                new_date += date[i - 2 : i]
+                new_date += date[i - 2 : i] + "日"
         except:
             continue
     return new_date
