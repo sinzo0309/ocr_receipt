@@ -16,6 +16,7 @@ def date_process(date):
             new_date += date[i - 2 : i]
         elif term == "日":
             new_date += date[i - 2 : i]
+    return new_date
 
 
 def process_string(S):
