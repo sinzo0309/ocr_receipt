@@ -142,10 +142,12 @@ def upload_user_files():
             redirect("/upload1")
         else:
             if result[1] == None:
+                print(11111111111)
                 return render_template(
                     "result.html", result=result[0], img_path=img_path
                 )
             else:
+                print(22222222222)
                 return render_template(
                     "result.html", result=result[0], date=result[1], img_path=img_path
                 )
