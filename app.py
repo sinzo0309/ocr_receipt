@@ -199,6 +199,8 @@ def save():
     # current_user = current_user
     # Flask-Loginを使用していると仮定
     saves = Save.query.filter_by(user_id=current_user.id).all()
+    for save in saves:
+        print(save)
     # saves = Save.query.all()
     return render_template("save.html", saves=saves)
 
