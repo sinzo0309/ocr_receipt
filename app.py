@@ -42,7 +42,7 @@ class Save(db.Model):
     username = db.Column(db.String(30), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     saved_at = db.Column(
-        db.DateTime, nullable=False, default=datetime.now(pytz.timezone("Asia/Tokyo"))
+        db.DateTime, nullable=True, default=datetime.now(pytz.timezone("Asia/Tokyo"))
     )
     baught_at = db.Column(db.String(40), unique=True, nullable=True)
 
