@@ -31,7 +31,7 @@ def make_session_permanent():
 
 
 login_manager = LoginManager(app)
-# login_manager.init_app(app)
+login_manager.init_app(app)
 UPLOAD_FOLDER = "./static/image"
 migrate = Migrate(app, db, render_as_batch=True)
 
