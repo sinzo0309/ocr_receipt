@@ -128,6 +128,7 @@ def logout():
 def upload_user_files():
     if request.method == "POST":
         upload_file = request.files["upload_file"]
+        print(type(upload_file))
         img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
         upload_file.save(img_path)
         result = detect_text(img_path)
@@ -153,6 +154,7 @@ def upload1_user_files():
     try:
         if request.method == "POST":
             upload_file = request.files["upload_file"]
+            print(type(upload_file))
             img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
             upload_file.save(img_path)
             return redirect("/index")
