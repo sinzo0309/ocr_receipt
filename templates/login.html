@@ -1,30 +1,50 @@
-{% extends "layout_login.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="static\css\style_login.css">
+  <title>家計簿アプリ</title>
+</head>
+<body>
 
-<h1>ログイン画面</h1>
-<form  action = "/login", method = "POST">
-  <div> 
-    <label for="username">ユーザー名</label>
-    <input type = "text" name = "username">
-    <br>
-    <br>
-    <label for="password">パスワード</label>
-    <input type="password" name="password">
-    
-    <input type="submit" name="password">
-    <h1><a href="/signup">新規登録</a></h1>
+<div class="side-block"></div>
+<div class="center_content">
+  <p class="animated-text" id="animatedText"></p>
 
+  <!-- 固定された位置に表示されるログインフォーム -->
+  <div id="loginForm">
+    <form action="/login" method="POST">
+      <div>
+        <label for="username">ユーザー名</label>
+        <input type="text" name="username">
+        <br>
+        <br>
+        <label for="password">パスワード</label>
+        <input type="password" name="password">
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul class="flashes">
-      {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+        <input type="submit" name="password">
+      </div>
+    </form>
   </div>
-</form>
+  <br>
+  <!-- 新規登録のリンク（ボタン） -->
+  <a href="/signup" id="signupButton">新規登録</a>
+  <script>
+    const textContainer = document.getElementById('animatedText');
+    const text = 'ログイン画面';
 
-{% endblock %}
+    text.split('').forEach((char, index) => {
+      const charElement = document.createElement('span');
+      charElement.textContent = char;
+      charElement.className = 'letter';
+      charElement.style.animationDelay = `${index * 0.1}s`;
+      textContainer.appendChild(charElement);
+    });
+  </script>
+
+</div>
+<div class="side-block"></div>
+</body>
+</html>

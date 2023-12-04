@@ -16,23 +16,28 @@
     flex-direction: column;
   }
   
-  footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width: 100%;
-    background-color: #000;
-    font-size: 15px;
-    color: #fff;
+
+
+/* 新しいクラスを追加してアニメーションを設定 */
+.animated-text {
+  font-size: 60px;
+  font-weight: bold; /* 太字 */
+  font-style: italic; /* 斜体 */
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block; /* インラインブロックに変更 */
+}
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(1em);
+  animation: appear 1s forwards;
+}
+
+@keyframes appear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-
-  .input{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-
-
+}

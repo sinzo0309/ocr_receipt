@@ -1,7 +1,8 @@
+<!-- login.html -->
 {% extends "layout_login.html" %} 
 {% block content %} 
-
-<p style="font-size: 50px;" class = "center_content">スキャン簿</p>
+<!-- pタグに新しいクラスを追加 -->
+<p class="animated-text" id="animatedText"></p>
 <h1>
     <a href="/login">ログイン</a>
     <br>
@@ -9,5 +10,16 @@
     <a href="/signup">新規登録</a>
 </h1>
 
-{% endblock %}
+<script>
+    const textContainer = document.getElementById('animatedText');
+    const text = 'スキャン簿';
 
+    text.split('').forEach((char, index) => {
+        const charElement = document.createElement('span');
+        charElement.textContent = char;
+        charElement.className = 'letter';
+        charElement.style.animationDelay = `${index * 0.1}s`;
+        textContainer.appendChild(charElement);
+    });
+</script>
+{% endblock %}
