@@ -21,7 +21,7 @@ from datetime import timedelta
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=10)
+# app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=10)
 db = SQLAlchemy(app)
 
 
@@ -30,8 +30,8 @@ def make_session_permanent():
     session.permanent = True
 
 
-login_manager = LoginManager()
-login_manager.init_app(app)
+login_manager = LoginManager(app)
+# login_manager.init_app(app)
 UPLOAD_FOLDER = "./static/image"
 migrate = Migrate(app, db, render_as_batch=True)
 
@@ -60,6 +60,18 @@ class User(UserMixin, db.Model):
 
     def change_password(self, new_password):
         self.password = generate_password_hash(new_password)
+
+
+"""
+with app.app_context():
+    # データベースを作成
+    db.create_all()
+"""
+
+if current_user.is_authenticated:
+    username = current_user.username
+else:
+    username = "Guest"
 
 
 @login_manager.user_loader
