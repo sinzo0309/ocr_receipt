@@ -68,11 +68,6 @@ with app.app_context():
     db.create_all()
 """
 
-if current_user.is_authenticated:
-    username = current_user.username
-else:
-    username = "Guest"
-
 
 @login_manager.user_loader
 def load_user(user_id):
