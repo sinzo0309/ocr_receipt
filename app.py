@@ -1,7 +1,7 @@
 import os
 import traceback
 from flask import Flask, request, render_template, redirect, url_for, flash, session
-from model_teseract import detect_text, date_process
+from model3 import detect_text, date_process
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import (
     UserMixin,
@@ -154,22 +154,6 @@ def upload_user_files():
 
 
 @login_required
-@app.route("/upload1", methods=["GET", "POST"])
-def upload1_user_files():
-    try:
-        if request.method == "POST":
-            upload_file = request.files["upload_file"]
-            print(type(upload_file))
-            img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
-            upload_file.save(img_path)
-            return redirect("/index")
-        else:
-            return render_template("/index")
-    except:
-        return render_template("scan2.html")
-
-
-@login_required
 @app.route("/upload2", methods=["GET", "POST"])
 def upload2_user_files():
     try:
@@ -180,7 +164,7 @@ def upload2_user_files():
             result = detect_text(img_path)
             cash = result[0]
             baught_at = result[1]
-            # baught_at = date_process(baught_at)
+            baught_at = date_process(baught_at)
             current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
             current_logged_in_user = User.query.filter_by(
                 username=current_user.username
