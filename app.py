@@ -130,7 +130,7 @@ def logout():
 
 
 @app.route("/upload", methods=["GET", "POST"])
-@login_required
+# @login_required
 def upload_user_files():
     if request.method == "POST":
         upload_file = request.files["upload_file"]
@@ -154,7 +154,7 @@ def upload_user_files():
 
 
 @app.route("/upload1", methods=["GET", "POST"])
-@login_required
+# @login_required
 def upload1_user_files():
     try:
         if request.method == "POST":
@@ -169,7 +169,7 @@ def upload1_user_files():
 
 
 @app.route("/create", methods=["GET", "POST"])
-@login_required
+# @login_required
 def create():
     if request.method == "POST":
         result = int(request.form.get("result"))
@@ -207,52 +207,8 @@ def create():
         return redirect(url_for("save"))  # /saveにリダイレク
 
 
-"""
-
-
-@app.route("/create", methods=["GET", "POST"])
-@login_required
-def create():
-    if request.method == "POST":
-        result = int(request.form.get("result"))
-        baught_at = request.form.get("baught_at")
-        baught_at = date_process(baught_at)
-
-        # 現在のユーザーを取得
-        current_logged_in_user = User.query.filter_by(
-            username=current_user.username
-        ).first()
-
-        # 既存の同じユーザー名の Save インスタンスを検索
-        existing_save = Save.query.filter_by(
-            username=current_logged_in_user.username
-        ).first()
-
-        if existing_save:
-            # 既存のデータがある場合は更新
-            print("existing!!")
-            existing_save.cash = int(result)
-            existing_save.saved_at = datetime.now(pytz.timezone("Asia/Tokyo"))
-            existing_save.baught_at = baught_at
-        else:
-            # 既存のデータがない場合は新規作成
-            print("not existing!!")
-            new_save = Save(
-                user_id=current_logged_in_user.id,
-                cash=int(result),
-                username=current_logged_in_user.username,
-                saved_at=datetime.now(pytz.timezone("Asia/Tokyo")),
-                baught_at=baught_at,
-            )
-            db.session.add(new_save)
-
-        db.session.commit()
-        return redirect(url_for("save"))
-"""
-
-
 @app.route("/save")
-@login_required
+# @login_required
 def save():
     # 全てのデータを取得
     # current_user = current_user
@@ -263,7 +219,7 @@ def save():
 
 
 @app.route("/calender_data")
-@login_required
+# @login_required
 def calendar_data():
     # データベースからデータを取得するクエリを実行
     # events = Save.query.all()
@@ -311,7 +267,7 @@ def calendar_data():
 
 
 @app.route("/delete/<int:save_id>", methods=["POST"])
-@login_required
+# @login_required
 def delete(save_id):
     save_to_delete = Save.query.get(save_id)
 
@@ -324,7 +280,7 @@ def delete(save_id):
 
 
 @app.route("/edit/<int:save_id>", methods=["GET", "POST"])
-@login_required
+# @login_required
 def edit(save_id):
     save = Save.query.get(save_id)
     if request.method == "POST":
@@ -341,14 +297,14 @@ def edit(save_id):
 
 
 @app.route("/scan2")
-@login_required
+# @login_required
 def scan2():
     return render_template("scan2.html")
 
 
 # パスワードを変更する
 @app.route("/change_password", methods=["GET", "POST"])
-@login_required
+# @login_required
 def change_password():
     if request.method == "POST":
         current_password = request.form.get("current_password")
