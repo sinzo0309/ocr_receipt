@@ -56,19 +56,13 @@ class User(UserMixin, db.Model):
         self.password = generate_password_hash(new_password)
 
 
-# with app.app_context():
-# Userテーブルを作成
-# db.create_all()
-# db.drop_all()
-
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
 
+@login_required
 @app.route("/")
-# @login_required
 def index():
     return render_template("home.html")
 
@@ -266,6 +260,7 @@ def calendar_data():
         return redirect(url_for("save"))
 
 
+@login_required
 @app.route("/delete/<int:save_id>", methods=["POST"])
 @login_required
 def delete(save_id):
@@ -279,8 +274,8 @@ def delete(save_id):
     return redirect(url_for("save"))  # /saveにリダイレクト
 
 
+@login_required
 @app.route("/edit/<int:save_id>", methods=["GET", "POST"])
-# @login_required
 def edit(save_id):
     save = Save.query.get(save_id)
     if request.method == "POST":
@@ -303,8 +298,8 @@ def scan2():
 
 
 # パスワードを変更する
+@login_required
 @app.route("/change_password", methods=["GET", "POST"])
-# @login_required
 def change_password():
     if request.method == "POST":
         current_password = request.form.get("current_password")
