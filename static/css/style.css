@@ -9,33 +9,31 @@
   align-items: center;
 }
 
+body {
+  background-image: url("../image/背景画像.jpg");
+}
 nav {
   margin-right: 5%;
 }
 
-a {
-  color: #fff;
+.aaa {
+  color: rgb(62, 5, 248) 7, 235;
   text-decoration: none;
 }
 
-a:hover {
+
+.aaa:hover { 
   color: #f00;
 }
 
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  height: 50px;
-  width: 100%;
-  background-color: #000;
-  font-size: 15px;
-  color: #fff;
+footer { 
+  bottom: 0;
 }
 
 
 .center_content {
+  color: #0d0101;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,4 +42,9 @@ footer {
 .aaa{
   color: #ce1c1c;
   text-decoration: none;
+}
+
+.form-control-button{
+  color:black;
+  margin-bottom: 50px; 
 }

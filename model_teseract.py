@@ -7,6 +7,21 @@ import pyocr.builders
 import cv2
 
 
+def date_process(date):
+    new_date = ""
+    for i, term in enumerate(date):
+        try:
+            if term == "年":
+                new_date += date[i - 4 : i] + "年"
+            elif term == "月":
+                new_date += date[i - 2 : i] + "月"
+            elif term == "日":
+                new_date += date[i - 2 : i] + "日"
+        except:
+            continue
+    return new_date
+
+
 def process_string(S):
     result = []
     # print()
@@ -34,7 +49,7 @@ def process_string(S):
     return result
 
 
-def detect_text(img_path, ksize):
+def detect_text(img_path):
     # Tesseract-OCRの実行ファイルと言語データのパスを指定
     TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR"
     TESSDATA_PATH = r"C:\Program Files\Tesseract-OCR\tessdata"
@@ -64,4 +79,6 @@ def detect_text(img_path, ksize):
             money += process_string(txt.content)
 
     print(money)
-    return max(money)
+    print("ここまでがモデルの部分")
+    print("###################")
+    return [max(money), 2]

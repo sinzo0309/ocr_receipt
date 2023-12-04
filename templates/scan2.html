@@ -6,13 +6,6 @@
     <button id="snap">Snap Photo</button>
     <canvas id="canvas" width="300" height="720"></canvas>
 
-    <div class="enter_btn">
-        <h2>レシートの写真をアップロードしてください</h2>
-        <form action = "/upload" method="POST" enctype="multipart/form-data">
-            <p><input type="file" id = "upload_file" name = "upload_file" multiple="multiple" class="form-control"></p>
-            <p><input type="submit" value="送信" class="form-control btn btn-primary"></p>
-        </form>
-    </div>
     </body>
     <script>
     // カメラの設定
@@ -36,20 +29,25 @@
     var context = canvas.getContext('2d');
     var snap = document.querySelector("#snap");
     var scan = document.querySelector("#scan");
-    
+
     snap.addEventListener("click", function() {
     context.drawImage(video, 0, 0, 300, 720);
     canvas.toBlob(function(blob) {
         var formData = new FormData();
         formData.append('upload_file', blob, 'レシート.png');
 
-        fetch('/upload1', {
+        fetch('/upload2', {
             method: 'POST',
             body: formData
         })
         .then(response => response.text())
         .then(data => {
             console.log(data);
+        // アップロード結果を反映させるために一定時間待つ (例: 2秒)
+        setTimeout(function () {
+          // 画像アップロード後、ページを推移
+          window.location.href = '/save'; // 推移先のURLに変更
+        }, 100); // 2000ミリ秒 = 2秒
         })
         .catch(error => {
             console.error('エラーが発生しました: ' + error);

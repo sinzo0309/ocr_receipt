@@ -1,7 +1,7 @@
 import os
-from sqlalchemy import MetaData
-from flask import Flask, request, render_template, redirect, url_for, flash
-from model3 import detect_text, date_process
+import traceback
+from flask import Flask, request, render_template, redirect, url_for, flash, session
+from model_teseract import detect_text, date_process
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import (
     UserMixin,
@@ -15,14 +15,20 @@ from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import pytz  # タイムゾーンをインポート
+from datetime import timedelta
 
-from alembic import op
-import sqlalchemy as sa
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=30)
 db = SQLAlchemy(app)
+
+
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -163,6 +169,54 @@ def upload1_user_files():
         return render_template("scan2.html")
 
 
+@login_required
+@app.route("/upload2", methods=["GET", "POST"])
+def upload2_user_files():
+    try:
+        if request.method == "POST":
+            upload_file = request.files["upload_file"]
+            img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
+            upload_file.save(img_path)
+            result = detect_text(img_path)
+            cash = result[0]
+            baught_at = result[1]
+            # baught_at = date_process(baught_at)
+            current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
+            current_logged_in_user = User.query.filter_by(
+                username=current_user.username
+            ).first()
+
+            if baught_at != None:
+                save = Save(
+                    # user_id=current_user.id,
+                    user_id=current_logged_in_user.id,
+                    cash=int(cash),
+                    # username=current_logged_in_user.username,
+                    saved_at=current_time,
+                    baught_at=baught_at,
+                )
+            else:
+                save = Save(
+                    # user_id=current_user.id,
+                    user_id=current_logged_in_user.id,
+                    cash=int(cash),
+                    # username=current_logged_in_user.username,
+                    saved_at=current_time,
+                )
+            # saved_at=current_time
+            # データベースに登録
+            db.session.add(save)
+            db.session.commit()
+            return "Upload successful"
+        else:
+            return render_template("/index")
+    except:
+        traceback.print_exc()
+        return render_template("scan2.html")
+    finally:
+        print("finish")
+
+
 @app.route("/create", methods=["GET", "POST"])
 @login_required
 def create():
@@ -199,7 +253,8 @@ def create():
         # データベースに登録
         db.session.add(save)
         db.session.commit()
-        return redirect(url_for("save"))  # /saveにリダイレク
+        print("Yes" + str(4))
+        # return redirect(url_for("save"))  # /saveにリダイレク
 
 
 @app.route("/save")
