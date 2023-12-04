@@ -162,8 +162,8 @@ def upload1_user_files():
         return render_template("scan2.html")
 
 
-@login_required
 @app.route("/create", methods=["GET", "POST"])
+@login_required
 def create():
     if request.method == "POST":
         result = int(request.form.get("result"))
