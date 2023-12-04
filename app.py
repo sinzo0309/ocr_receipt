@@ -56,10 +56,10 @@ class User(UserMixin, db.Model):
         self.password = generate_password_hash(new_password)
 
 
-with app.app_context():
-    # Userテーブルを作成
-    db.create_all()
-    # db.drop_all()
+# with app.app_context():
+# Userテーブルを作成
+# db.create_all()
+# db.drop_all()
 
 
 @login_manager.user_loader
