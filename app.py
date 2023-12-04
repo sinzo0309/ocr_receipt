@@ -128,9 +128,10 @@ def logout():
 def upload_user_files():
     if request.method == "POST":
         upload_file = request.files["upload_file"]
+        img_path = upload_file
         print(type(upload_file))
-        img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
-        upload_file.save(img_path)
+        # img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
+        # upload_file.save(img_path)
         result = detect_text(img_path)
         if result == None:
             flash("読み取りに失敗しました")
