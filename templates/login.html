@@ -24,13 +24,22 @@
         <label for="password">パスワード</label>
         <input type="password" name="password">
 
-        <input type="submit" name="password">
+        <input type="submit" name="password" value="ログイン">
       </div>
     </form>
   </div>
   <br>
   <!-- 新規登録のリンク（ボタン） -->
   <a href="/signup" id="signupButton">新規登録</a>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
   <script>
     const textContainer = document.getElementById('animatedText');
     const text = 'ログイン';
