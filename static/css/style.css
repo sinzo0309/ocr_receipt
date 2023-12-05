@@ -11,18 +11,19 @@
 
 body {
   background-image: url("../image/背景画像.jpg");
+  color: #eae2e2;
 }
 nav {
   margin-right: 5%;
 }
 
-.aaa {
+.aa {
   color: rgb(62, 5, 248) 7, 235;
   text-decoration: none;
 }
 
 
-.aaa:hover { 
+.aa:hover { 
   color: #f00;
 }
 
@@ -33,7 +34,7 @@ footer {
 
 
 .center_content {
-  color: #0d0101;
+  color: #eae2e2;
   display: flex;
   justify-content: center;
   align-items: center;

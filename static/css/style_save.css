@@ -13,15 +13,13 @@
     margin-right: 5%;
     }
 
-    .aaa {
-        color: #3c04f4;
-        text-decoration: none;
-      }
+.aaa {
+    color: #3c04f4;
+    text-decoration: none;}
     
     
-    .aaa:hover {
-        color: #f00;
-      }
+.aaa:hover {
+    color: #f00;}
 
 body {
     background-color: #fafafa;
