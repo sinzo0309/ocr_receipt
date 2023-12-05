@@ -1,7 +1,7 @@
 {% extends "layout_login.html" %} 
 {% block content %} 
 
-<h1>新規登録</h1>
+<p class="animated-text" id="animatedText"></p>
 <form  action = "/signup", method = "POST">
   <div> 
     <label for="username">ユーザー名</label>
@@ -17,6 +17,8 @@
       <h3>
         <input type="submit" value="登録">
       </h3>
+      <h3><a href="/login" id="signupButton">ログイン画面</a></h3>
+      
     </div>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -28,8 +30,18 @@
     </ul>
     {% endif %}
     {% endwith %}
-    
-    <!-- <input type="submit" name="password"> -->
+    <script>
+      const textContainer = document.getElementById('animatedText');
+      const text = '新規登録';
+  
+      text.split('').forEach((char, index) => {
+        const charElement = document.createElement('span');
+        charElement.textContent = char;
+        charElement.className = 'letter';
+        charElement.style.animationDelay = `${index * 0.1}s`;
+        textContainer.appendChild(charElement);
+      });
+    </script>
 </div>
 </form>
 
