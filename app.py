@@ -11,8 +11,9 @@ from flask import (
     jsonify,
 )
 
-# from model3 import detect_text, date_process
-from model_teseract import detect_text, date_process
+from model3 import detect_text, date_process
+
+# from model_teseract import detect_text, date_process
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import (
     UserMixin,
