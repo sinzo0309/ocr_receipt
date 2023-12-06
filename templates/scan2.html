@@ -32,38 +32,54 @@
 
     // ...
 
+    // ...
+
     snap.addEventListener("click", function() {
     context.drawImage(video, 0, 0, 300, 720);
     canvas.toBlob(function(blob) {
         var formData = new FormData();
         formData.append('upload_file', blob, 'レシート.png');
 
-        fetch('/upload2', {
-            method: 'POST',
-            body: formData,
-            credentials: 'include' // 認証情報を含む
-        })
-        .then(response => response.text())
+        // セッション情報を取得
+        fetch('/get_session', { credentials: 'include' })
+        .then(response => response.json())
         .then(data => {
-            console.log(data);
-
-            // アップロード結果を反映させるために一定時間待つ (例: 4秒)
-            setTimeout(function () {
-                // ログイン認証が維持されたまま、/save に POST リクエストを送る
-                fetch('/save', {
-                    method: 'POST',
-                    credentials: 'include' // 認証情報を含む
+            // 取得したセッション情報を使ってリクエストを行う
+            fetch('/upload2', {
+                method: 'POST',
+                body: formData,
+                credentials: 'include', // 認証情報を含む
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: data.username
                 })
-                .then(response => response.text())
-                .then(data => {
-                    console.log(data);
-                    // /save へのリクエストが終わった後、ページを推移
-                    window.location.href = '/save'; // 推移先のURLに変更
-                })
-                .catch(error => {
-                    console.error('エラーが発生しました: ' + error);
-                });
-            }, 4000); // 4000ミリ秒 = 4秒
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                // アップロード結果を反映させるために一定時間待つ (例: 4秒)
+                setTimeout(function () {
+                    // ログイン認証が維持されたまま、/save に POST リクエストを送る
+                    fetch('/save', {
+                        method: 'POST',
+                        credentials: 'include' // 認証情報を含む
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log(data);
+                        // /save へのリクエストが終わった後、ページを推移
+                        window.location.href = '/save'; // 推移先のURLに変更
+                    })
+                    .catch(error => {
+                        console.error('エラーが発生しました: ' + error);
+                    });
+                }, 4000); // 4000ミリ秒 = 4秒
+            })
+            .catch(error => {
+                console.error('エラーが発生しました: ' + error);
+            });
         })
         .catch(error => {
             console.error('エラーが発生しました: ' + error);
@@ -72,6 +88,7 @@
     });
 
 // ...
+
 
 
     </script>
