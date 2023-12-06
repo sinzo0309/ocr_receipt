@@ -198,7 +198,7 @@ def upload2_user_files():
             # データベースに登録
             db.session.add(save)
             db.session.commit()
-            return "Upload successful"
+            return render_template("save.html")
         else:
             return render_template("/index")
     except:
