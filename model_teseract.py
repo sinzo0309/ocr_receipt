@@ -4,7 +4,33 @@ import os
 from PIL import Image
 import pyocr
 import pyocr.builders
-import cv2
+import re
+
+
+def cashfinder(lines):
+    y_indices = []
+
+    # Initialize an empty list to store the cash amounts
+    money_list = []
+
+    # Iterate over the lines
+    for line in lines:
+        # If "消費税" or "消" is in the line, store the y-index
+        if "消費税" in line.content or "消" in line.content:
+            y_indices.append(line.position[1][1])
+
+    # Iterate over the lines again
+    for line in lines:
+        # If the y-index is near one of the stored y-indices
+        if any(abs(line.position[1][1] - y_index) <= 10 for y_index in y_indices):
+            # Find any numbers in the line
+            numbers = re.findall(r"\d+", line.content)
+            # If there are any numbers, add them to the money_list
+            if numbers:
+                money_list.extend(numbers)
+
+    # Return the money_list
+    return money_list
 
 
 def date_process(date):
@@ -12,11 +38,11 @@ def date_process(date):
     for i, term in enumerate(date):
         try:
             if term == "年":
-                new_date += date[i - 4 : i] + "年"
+                new_date += date[i - 5 : i] + "年"
             elif term == "月":
-                new_date += date[i - 2 : i] + "月"
+                new_date += date[i - 3 : i] + "月"
             elif term == "日":
-                new_date += date[i - 2 : i] + "日"
+                new_date += date[i - 3 : i] + "日"
         except:
             continue
     return new_date
@@ -71,14 +97,26 @@ def detect_text(img_path):
     text = tool.image_to_string(
         Image.open(file_path), lang=lang, builder=pyocr.builders.LineBoxBuilder()
     )
-    # print(text)
+    print(text)
     money = []
+    date = ""
+
     for txt in text:
         print(txt.content)
         if "合計" in txt.content or "計" in txt.content or "合" in txt.content:
             money += process_string(txt.content)
+        if "年" in txt.content or "月" in txt.content or "日" in txt.content:
+            date += txt.content
 
     print(money)
     print("ここまでがモデルの部分")
     print("###################")
-    return [max(money), 2]
+    if money:
+        print(111111111111111)
+        return [max(money), date]
+    else:
+        print(2222222222222)
+        money = cashfinder(text)
+        print(money)
+        cash = max(money)
+        return [cash, date]

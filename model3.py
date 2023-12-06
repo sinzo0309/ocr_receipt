@@ -51,7 +51,7 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    # print(texts[0].description)
+    print(texts[0].description)
     date = ""
     for text in texts[1:]:
         flag = True
@@ -97,6 +97,6 @@ def detect_text(path):
             else:
                 Sum.append(text.description)
 
-    # print(Sum)
+    print(Sum)
     n_sum = process_string(Sum)
     return [max(n_sum), date]
