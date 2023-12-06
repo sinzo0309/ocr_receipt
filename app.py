@@ -10,7 +10,9 @@ from flask import (
     session,
     jsonify,
 )
-from model3 import detect_text, date_process
+
+# from model3 import detect_text, date_process
+from model_teseract import detect_text, date_process
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import (
     UserMixin,
@@ -24,12 +26,11 @@ from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import pytz  # タイムゾーンをインポート
-from datetime import timedelta
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
-# app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=10)
+
 db = SQLAlchemy(app)
 
 
@@ -40,6 +41,7 @@ def make_session_permanent():
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
+login_manager.session_protection = "strong"
 UPLOAD_FOLDER = "./static/image"
 migrate = Migrate(app, db, render_as_batch=True)
 
@@ -85,7 +87,8 @@ def get_session():
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    return db.session.query(User).get(user_id)
+    # return User.query.get(user_id)
 
 
 @login_required
@@ -338,7 +341,8 @@ def delete(save_id):
 @login_required
 @app.route("/edit/<int:save_id>", methods=["GET", "POST"])
 def edit(save_id):
-    save = Save.query.get(save_id)
+    save = db.session.query(Save).get(save_id)
+    # save = Save.query.get(save_id)
     if request.method == "POST":
         new_cash = request.form.get("cash")
         new_baught_at = request.form.get("baught_at")
