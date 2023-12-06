@@ -262,7 +262,7 @@ def create():
         # return redirect(url_for("save"))  # /saveにリダイレク
 
 
-@app.route("/save")
+@app.route("/save", methods=["GET", "POST"])
 @login_required
 def save():
     # 全てのデータを取得
