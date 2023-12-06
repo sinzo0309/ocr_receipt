@@ -55,7 +55,7 @@ def detect_text(path):
     date = ""
     for text in texts[1:]:
         flag = True
-        print(text.description)
+        # print(text.description)
         if "合計" in text.description or "計" in text.description:
             y1 = text.bounding_poly.vertices[0].y
             y2 = text.bounding_poly.vertices[2].y
