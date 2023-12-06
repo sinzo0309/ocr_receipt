@@ -1,6 +1,15 @@
 import os
 import traceback
-from flask import Flask, request, render_template, redirect, url_for, flash, session
+from flask import (
+    Flask,
+    request,
+    render_template,
+    redirect,
+    url_for,
+    flash,
+    session,
+    jsonify,
+)
 from model3 import detect_text, date_process
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import (
@@ -16,7 +25,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import pytz  # タイムゾーンをインポート
 from datetime import timedelta
-
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
@@ -67,6 +75,12 @@ with app.app_context():
     # データベースを作成
     db.create_all()
 """
+
+
+@app.route("/get_session", methods=["GET"])
+def get_session():
+    # セッション情報をJSON形式でクライアントに返す
+    return jsonify(username=session.get("username"))
 
 
 @login_manager.user_loader
