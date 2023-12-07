@@ -10,6 +10,7 @@ from flask import (
     session,
     jsonify,
 )
+from flask_cors import CORS
 
 from model3 import detect_text, date_process
 
@@ -33,6 +34,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
 # app.config["SESSION_SQLALCHEMY"] = SQLAlchemy(app)
 db = SQLAlchemy(app)
+# jsからのPOSTもokにするやつ
+CORS(app)  # これ
 
 
 @app.before_request
@@ -237,6 +240,8 @@ def create():
         current_logged_in_user = User.query.filter_by(
             username=current_user.username
         ).first()
+        print(current_logged_in_user)
+
         if baught_at != None:
             save = Save(
                 # user_id=current_user.id,
