@@ -103,7 +103,13 @@ def detect_text(img_path):
 
     for txt in text:
         print(txt.content)
-        if "合計" in txt.content or "計" in txt.content or "合" in txt.content:
+        if (
+            "合計" in txt.content
+            or "計" in txt.content
+            or "合" in txt.content
+            or "消費" in txt.content
+            or "費税" in txt.content
+        ):
             money += process_string(txt.content)
         if "年" in txt.content or "月" in txt.content or "日" in txt.content:
             date += txt.content

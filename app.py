@@ -46,11 +46,12 @@ login_manager.session_protection = "strong"
 UPLOAD_FOLDER = "./static/image"
 migrate = Migrate(app, db, render_as_batch=True)
 
-# revision identifiers, used by Alembic.
-revision = "7d514add877e"
-down_revision = None
-branch_labels = None
-depends_on = None
+
+@app.route("/debug")
+def debug():
+    print(f"current_user: {current_user}")
+    print(f"session: {session}")
+    return "Check the console for debug information."
 
 
 class Save(db.Model):
