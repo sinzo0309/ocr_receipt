@@ -81,22 +81,25 @@ def detect_text(path):
     Sum = []
 
     for text in texts[10:]:
-        if (
-            y1 - 5 <= text.bounding_poly.vertices[0].y <= y2 + 5
-            or y1 - 5 <= text.bounding_poly.vertices[2].y <= y2 + 5
-        ):
-            # print(text.description)
-            result = re.sub(r"\D", "", text.description)
-            Sum.append(result)
-            # print(result)
-            if "," in text.description:
-                Sum.append(text.description.replace(",", ""))
-            elif "." in text.description:
-                Sum.append(text.description.replace(".", ""))
-            elif " " in text.description:
-                Sum.append(text.description.replace(" ", ""))
-            else:
-                Sum.append(text.description)
+        try:
+            if (
+                y1 - 5 <= text.bounding_poly.vertices[0].y <= y2 + 5
+                or y1 - 5 <= text.bounding_poly.vertices[2].y <= y2 + 5
+            ):
+                # print(text.description)
+                result = re.sub(r"\D", "", text.description)
+                Sum.append(result)
+                # print(result)
+                if "," in text.description:
+                    Sum.append(text.description.replace(",", ""))
+                elif "." in text.description:
+                    Sum.append(text.description.replace(".", ""))
+                elif " " in text.description:
+                    Sum.append(text.description.replace(" ", ""))
+                else:
+                    Sum.append(text.description)
+        except:
+            continue
 
     print(Sum)
     n_sum = process_string(Sum)
