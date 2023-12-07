@@ -137,7 +137,7 @@ def login():
 
         if user is not None and check_password_hash(user.password, password):
             # if password == user.password:
-            login_user(user)
+            login_user(user, remember=True)
             return redirect("/index")
         else:
             app.logger.error(f"Login failed for username: {username}")
