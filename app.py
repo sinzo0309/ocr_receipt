@@ -31,7 +31,7 @@ import pytz  # タイムゾーンをインポート
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
-app.config["SESSION_SQLALCHEMY"] = SQLAlchemy(app)
+# app.config["SESSION_SQLALCHEMY"] = SQLAlchemy(app)
 db = SQLAlchemy(app)
 
 
@@ -214,7 +214,7 @@ def upload2_user_files():
             db.session.commit()
             return render_template("save.html")
         else:
-            return render_template("index.html")
+            return render_template("/index")
     except:
         traceback.print_exc()
         return render_template("scan2.html")
