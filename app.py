@@ -130,7 +130,7 @@ def login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-
+        session["username"] = username
         user = User.query.filter_by(username=username).first()
 
         if user is not None and check_password_hash(user.password, password):
