@@ -19,6 +19,7 @@ def date_process(date):
                 new_date += date[i - 2 : i] + "日"
         except:
             continue
+    print(new_date)
     return new_date
 
 
