@@ -35,7 +35,7 @@ app.config["SECRET_KEY"] = os.urandom(24)
 # app.config["SESSION_SQLALCHEMY"] = SQLAlchemy(app)
 db = SQLAlchemy(app)
 # jsからのPOSTもokにするやつ
-CORS(app)  # これ
+CORS(app, supports_credentials=True)  # これ
 
 
 @app.before_request
