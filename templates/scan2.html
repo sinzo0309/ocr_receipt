@@ -41,7 +41,7 @@
         fetch('/upload2', {
             method: 'POST',
             body: formData,
-            credentials: 'include' // 認証情報を含む
+            credentials: 'include', // 認証情報を含む
         })
         .then(response => response.text())
         .then(data => {

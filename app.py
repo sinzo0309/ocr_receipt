@@ -189,7 +189,11 @@ def upload2_user_files():
             cash = result[0]
             baught_at = result[1]
             baught_at = date_process(baught_at)
+            print(baught_at, cash)
             current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
+            print("###########")
+            print(current_user)
+            print("###########")
             current_logged_in_user = User.query.filter_by(
                 username=current_user.username
             ).first()
