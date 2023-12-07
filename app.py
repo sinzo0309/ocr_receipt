@@ -27,12 +27,16 @@ from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import pytz  # タイムゾーンをインポート
+from flask_session import Session
 
 app = Flask(__name__)
+# app.config["SESSION_TYPE"] = "sqlalchemy"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
-
+app.config["SESSION_SQLALCHEMY"] = SQLAlchemy(app)
 db = SQLAlchemy(app)
+
+# Session(app)
 
 
 @app.before_request
@@ -74,11 +78,9 @@ class User(UserMixin, db.Model):
         self.password = generate_password_hash(new_password)
 
 
-"""
-with app.app_context():
-    # データベースを作成
-    db.create_all()
-"""
+# with app.app_context():
+# データベースを作成
+# db.create_all()
 
 
 @app.route("/get_session", methods=["GET"])
@@ -109,9 +111,6 @@ def scan():
 def signup():
     try:
         if request.method == "POST":
-            # username = request.form.get("username")
-            # password = request.form.get("password ")
-
             user = User(
                 username=request.form.get("username"),
                 password=generate_password_hash(request.form.get("password")),
@@ -263,8 +262,7 @@ def create():
         # データベースに登録
         db.session.add(save)
         db.session.commit()
-        print("Yes" + str(4))
-        # return redirect(url_for("save"))  # /saveにリダイレク
+        return redirect(url_for("save"))  # /saveにリダイレク
 
 
 @app.route("/save", methods=["GET", "POST"])
