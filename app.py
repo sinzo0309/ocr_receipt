@@ -32,7 +32,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
 app.config["SESSION_SQLALCHEMY"] = SQLAlchemy(app)
-# db = SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 
 @app.before_request
