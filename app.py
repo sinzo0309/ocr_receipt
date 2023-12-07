@@ -131,6 +131,7 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         session["username"] = username
+        # なんかここ付け加えたらいけたわ(AnonymousUserMixin問題)
         user = User.query.filter_by(username=username).first()
 
         if user is not None and check_password_hash(user.password, password):
@@ -236,11 +237,7 @@ def create():
         result = int(request.form.get("result"))
         baught_at = request.form.get("baught_at")
         baught_at = date_process(baught_at)
-        # POSTリクエストからresultを取得
-        # タイムゾーンを指定して現在の日時を取得
-        # current_user = current_user
         current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
-        # current_user = User.query.filter_by(username=current_user.username).first()
         current_logged_in_user = User.query.filter_by(
             username=current_user.username
         ).first()
@@ -248,23 +245,17 @@ def create():
 
         if baught_at != None:
             save = Save(
-                # user_id=current_user.id,
                 user_id=current_logged_in_user.id,
                 cash=int(result),
-                # username=current_logged_in_user.username,
                 saved_at=current_time,
                 baught_at=baught_at,
             )
         else:
             save = Save(
-                # user_id=current_user.id,
                 user_id=current_logged_in_user.id,
                 cash=int(result),
-                # username=current_logged_in_user.username,
                 saved_at=current_time,
             )
-        # saved_at=current_time
-        # データベースに登録
         db.session.add(save)
         db.session.commit()
         return redirect(url_for("save"))  # /saveにリダイレク
@@ -273,20 +264,14 @@ def create():
 @app.route("/save", methods=["GET", "POST"])
 @login_required
 def save():
-    # 全てのデータを取得
-    # current_user = current_user
-    # Flask-Loginを使用していると仮定
     saves = Save.query.filter_by(user_id=current_user.id).all()
     print(current_user.username)
-    # saves = Save.query.all()
     return render_template("save.html", saves=saves)
 
 
 @login_required
 @app.route("/calender_data")
 def calendar_data():
-    # データベースからデータを取得するクエリを実行
-    # events = Save.query.all()
     try:
         events = Save.query.filter_by(user_id=current_user.id).all()
 
