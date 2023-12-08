@@ -101,6 +101,6 @@ def detect_text(path):
         except:
             continue
 
-    print(Sum)
+    print("Sum", Sum)
     n_sum = process_string(Sum)
     return [max(n_sum), date]
