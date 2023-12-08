@@ -54,17 +54,22 @@ def detect_text(path):
     texts = response.text_annotations
     print(texts[0].description)
     date = ""
+    flag = True
+    F = True
     for text in texts[1:]:
-        flag = True
         # print(text.description)
         if (
             "合計" in text.description
             or "計" in text.description
             or "消費税" in text.description
-        ):
+        ) and F:
+            F = False
+            print("############")
+            print(text.description)
+            print("############")
             y1 = text.bounding_poly.vertices[0].y
             y2 = text.bounding_poly.vertices[2].y
-        elif ("年" in text.description or "月" in text.description) and flag:
+        if ("年" in text.description or "月" in text.description) and flag:
             ydate1 = text.bounding_poly.vertices[0].y
             ydate2 = text.bounding_poly.vertices[2].y
             flag = False
