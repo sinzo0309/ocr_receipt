@@ -49,3 +49,79 @@ footer {
   color:black;
   margin-bottom: 50px; 
 }
+
+/* Add this style to hide the navigation links initially */
+.nav-links {
+  display: none;
+}
+
+/* Other existing styles... */
+
+/* User
+<body>
+        <header class="header-nav-container">
+            <nav><a class = "aa" href="/change_password">パスワードの変更</a></nav>
+            <nav><a class = "aa" href="/scan2">スキャンページ</a></nav>
+            <nav><a class = "aa" href="/logout">ログアウト</a></nav>
+            <nav><a class = "aa" href="/save">データを見る</a></nav>
+            <nav><a class = "aa" href="/calender_data">カレンダー</a></nav>
+            <nav><a class = "aa" href="/index">ファイル形式で読み込む</a></nav>
+        </header>
+
+        {% block content %}{% endblock %}
+        <footer>
+            <small>© 2023 片岡慎三</small>
+        </footer>
+
+    </body>
+.header-nav-container{
+  background-size: cover;
+  width: 100%;
+  height: 40px;
+  background-color:rgb(0, 0, 4);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+body {
+  background-image: url("../image/背景画像.jpg");
+  color: #eae2e2;
+}
+nav {
+  margin-right: 5%;
+}
+
+.aa {
+  color: rgb(62, 5, 248) 7, 235;
+  text-decoration: none;
+}
+
+
+.aa:hover { 
+  color: #f00;
+}
+
+
+footer { 
+  bottom: 0;
+}
+
+
+.center_content {
+  color: #eae2e2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aaa{
+  color: #ce1c1c;
+  text-decoration: none;
+}
+
+.form-control-button{
+  color:black;
+  margin-bottom: 50px; 
+} */
