@@ -89,7 +89,8 @@ def detect_text(path):
                 # print(text.description)
                 result = re.sub(r"\D", "", text.description)
                 Sum.append(result)
-                # print(result)
+                print(result, "result")
+
                 if "," in text.description:
                     Sum.append(text.description.replace(",", ""))
                 elif "." in text.description:
