@@ -236,7 +236,6 @@ def create():
     if request.method == "POST":
         result = int(request.form.get("result"))
         baught_at = request.form.get("baught_at")
-        baught_at = date_process(baught_at)
         current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
         current_logged_in_user = User.query.filter_by(
             username=current_user.username

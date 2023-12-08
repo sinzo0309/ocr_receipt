@@ -12,11 +12,11 @@ def date_process(date):
     for i, term in enumerate(date):
         try:
             if term == "年":
-                new_date += date[i - 4 : i] + "年"
+                new_date += date[i - 4 : i + 1]
             elif term == "月":
-                new_date += date[i - 2 : i] + "月"
+                new_date += date[i - 2 : i + 1]
             elif term == "日":
-                new_date += date[i - 2 : i] + "日"
+                new_date += date[i - 2 : i + 1]
         except:
             continue
     print(new_date)
@@ -108,4 +108,4 @@ def detect_text(path):
 
     print("Sum", Sum)
     n_sum = process_string(Sum)
-    return [max(n_sum), date]
+    return [max(n_sum), date_process(date)]
