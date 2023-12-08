@@ -64,11 +64,7 @@ def detect_text(path):
         ):
             y1 = text.bounding_poly.vertices[0].y
             y2 = text.bounding_poly.vertices[2].y
-        elif (
-            "年" in text.description
-            or "月" in text.description
-            or "日" in text.description
-        ) and flag:
+        elif ("年" in text.description or "月" in text.description) and flag:
             ydate1 = text.bounding_poly.vertices[0].y
             ydate2 = text.bounding_poly.vertices[2].y
             flag = False
