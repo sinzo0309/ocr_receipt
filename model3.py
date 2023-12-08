@@ -27,13 +27,16 @@ def process_string(S):
     result = []
 
     for s in S:
-        if s.isdigit():
+        if s[0] == "4":
+            result.append(int(s))
+        elif s.isdigit():
             result.append(int(s))
         else:
             if s[1:].isdigit():
                 result.append(int(s[1:]))
             elif s[:-1].isdigit():
                 result.append(int(s[:-1]))
+
     return result
 
 
