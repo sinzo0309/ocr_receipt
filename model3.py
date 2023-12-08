@@ -75,8 +75,8 @@ def detect_text(path):
     try:
         for text in texts[1:]:
             if (
-                ydate1 - 3 <= text.bounding_poly.vertices[0].y <= ydate2 + 3
-                or ydate1 - 3 <= text.bounding_poly.vertices[2].y <= ydate2 + 3
+                ydate1 - 1 <= text.bounding_poly.vertices[0].y <= ydate2 + 1
+                or ydate1 - 1 <= text.bounding_poly.vertices[2].y <= ydate2 + 1
             ):
                 date += text.description
                 print(date)
