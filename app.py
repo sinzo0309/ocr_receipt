@@ -368,8 +368,6 @@ def edit(save_id):
             save.baught_at = new_baught_at
         if new_detail != save.detail:
             save.detail = new_detail
-        if new_saved_at != save.saved_at:
-            save.saved_at = new_saved_at
         db.session.commit()
         return redirect(url_for("save"))
     else:
