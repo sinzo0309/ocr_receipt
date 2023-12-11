@@ -13,14 +13,20 @@ def date_process(date):
         try:
             if term == "年":
                 new_date += date[i - 4 : i + 1]
+                print(new_date)
             elif term == "月":
                 new_date += date[i - 2 : i + 1]
+                print(new_date)
             elif term == "日":
                 new_date += date[i - 2 : i + 1]
+                print(new_date)
                 break
+            print("date_processの途中")
+            print(new_date)
         except:
             continue
-    # print(new_date)
+    print("これ")
+    print(new_date)
     return new_date
 
 
@@ -63,13 +69,19 @@ def detect_text(path):
     b = False
     detail = ""
     pattern = re.compile(r"[ぁ-んァ-ンー]+")
+    japanese_pattern = re.compile(r"[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]+")
     for text in texts[1:]:
         print(text.description)
         if b:
-            matches = re.findall(pattern, text.description)
-            result = "".join(matches)
-            if not result == "レジ" and len(result) > 0:
-                detail += str(result) + ","
+            # matches = re.findall(pattern, text.description)
+            # result = "".join(matches)
+            if (
+                not result == "レジ"
+                and not result == "レシート"
+                and len(result) > 0
+                and bool(japanese_pattern.search(text.description))
+            ):
+                detail += str(text.description) + ","
         if (
             "合計" in text.description
             or "消費税" in text.description
@@ -91,7 +103,7 @@ def detect_text(path):
                 or ydate1 - 1 <= text.bounding_poly.vertices[2].y <= ydate2 + 1
             ):
                 date += text.description
-                print(date)
+                # print(date)
     except:
         pass
     Sum = []
