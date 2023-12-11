@@ -86,8 +86,8 @@ def detect_text(path):
     detail = ""
 
     for text in texts[10:]:
-        if len(text) > 0:
-            detail += str(text)
+        if len(text.description) > 0:
+            detail += str(text.description)
         try:
             if (
                 y1 - 5 <= text.bounding_poly.vertices[0].y <= y2 + 5
