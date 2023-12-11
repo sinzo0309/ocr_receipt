@@ -38,11 +38,11 @@ def date_process(date):
     for i, term in enumerate(date):
         try:
             if term == "年":
-                new_date += date[i - 5 : i] + "年"
+                new_date += date[i - 4 : i] + "年"
             elif term == "月":
-                new_date += date[i - 3 : i] + "月"
+                new_date += date[i - 2 : i] + "月"
             elif term == "日":
-                new_date += date[i - 3 : i] + "日"
+                new_date += date[i - 2 : i] + "日"
         except:
             continue
     return new_date
@@ -117,12 +117,16 @@ def detect_text(img_path):
     print(money)
     print("ここまでがモデルの部分")
     print("###################")
+
+    return [2, "2023年12月11日", 3]
+    """
     if money:
         print(111111111111111)
-        return [max(money), date]
+        return [max(money), date, [0, 1, 2]]
     else:
         print(2222222222222)
         money = cashfinder(text)
         print(money)
         cash = max(money)
-        return [cash, date]
+        return [cash, date, [0, 1, 2]]
+    """

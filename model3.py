@@ -83,8 +83,11 @@ def detect_text(path):
     except:
         pass
     Sum = []
+    detail = ""
 
     for text in texts[10:]:
+        if len(text) > 0:
+            detail += str(text)
         try:
             if (
                 y1 - 5 <= text.bounding_poly.vertices[0].y <= y2 + 5
@@ -108,4 +111,4 @@ def detect_text(path):
 
     print("Sum", Sum)
     n_sum = process_string(Sum)
-    return [max(n_sum), date_process(date)]
+    return [max(n_sum), date_process(date), detail]

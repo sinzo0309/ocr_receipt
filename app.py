@@ -37,6 +37,14 @@ import pytz  # タイムゾーンをインポート
 # flask db upgrade
 # と入力
 
+# dbを新たに作る場合
+# migrationファイルとdbを削除
+# app.pyファイルのディレクトリでのコマンドで
+# flask db init
+# flask db migrate -m "Initial migration"
+# flask db upgrade
+# これでいけるはず
+
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
@@ -198,6 +206,7 @@ def upload2_user_files():
             result = detect_text(img_path)
             cash = result[0]
             baught_at = result[1]
+            detail = result[2]
             baught_at = date_process(baught_at)
             print(baught_at, cash)
             current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
@@ -207,7 +216,11 @@ def upload2_user_files():
             current_logged_in_user = User.query.filter_by(
                 username=current_user.username
             ).first()
-
+            print(current_logged_in_user.id)
+            print(int(cash))
+            print(current_time)
+            print(baught_at)
+            print(detail)
             if baught_at != None:
                 save = Save(
                     # user_id=current_user.id,
@@ -216,6 +229,7 @@ def upload2_user_files():
                     # username=current_logged_in_user.username,
                     saved_at=current_time,
                     baught_at=baught_at,
+                    detail=detail,
                 )
             else:
                 save = Save(
@@ -224,6 +238,7 @@ def upload2_user_files():
                     cash=int(cash),
                     # username=current_logged_in_user.username,
                     saved_at=current_time,
+                    detail=detail,
                 )
             # saved_at=current_time
             # データベースに登録

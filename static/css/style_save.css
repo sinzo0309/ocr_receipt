@@ -73,3 +73,18 @@ button {
 button:hover {
     background-color: #3292d6;
 }
+
+/* スタイルはここに追加 */
+
+ /* 詳細タブの初期スタイル */
+.detail-content {
+    display: none;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    background-color: #f9f9f9;
+    }
+  
+    /* アクティブな詳細タブのスタイル */
+.detail-content.active {
+    display: block;
+    }
