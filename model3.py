@@ -65,16 +65,30 @@ def detect_text(path):
     b = False
     detail = ""
     pattern = re.compile(r"[ぁ-んァ-ンー]+")
+    nword = [
+        "月",
+        "日",
+        "金",
+        "火",
+        "水",
+        "木",
+        "土",
+        "大きめ",
+        "税込",
+        "小計",
+        "品",
+        "合計",
+        "レジ",
+        "レシート",
+    ]
     japanese_pattern = re.compile(r"[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]+")
     for text in texts[1:]:
         print(text.description)
         if b:
             # matches = re.findall(pattern, text.description)
             # result = "".join(matches)
-            if (
-                not "レジ" in text.description
-                and not "レシート" in text.description
-                and bool(japanese_pattern.search(text.description))
+            if text.description in nword and bool(
+                japanese_pattern.search(text.description)
             ):
                 detail += str(text.description) + ","
         if (
