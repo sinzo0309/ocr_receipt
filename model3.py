@@ -97,6 +97,8 @@ def detect_text(path):
         "払",
         "バー",
         "コード",
+        "外",
+        "等",
     ]
     japanese_pattern = re.compile(r"[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]+")
     for text in texts[1:]:
