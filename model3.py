@@ -78,7 +78,6 @@ def detect_text(path):
             if (
                 not "レジ" in text.description
                 and not "レシート" in text.description
-                and len(result) > 0
                 and bool(japanese_pattern.search(text.description))
             ):
                 detail += str(text.description) + ","
