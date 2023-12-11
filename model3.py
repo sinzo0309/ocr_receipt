@@ -76,8 +76,8 @@ def detect_text(path):
             # matches = re.findall(pattern, text.description)
             # result = "".join(matches)
             if (
-                not result == "レジ"
-                and not result == "レシート"
+                not "レジ" in text.description
+                and not "レシート" in text.description
                 and len(result) > 0
                 and bool(japanese_pattern.search(text.description))
             ):
@@ -128,6 +128,6 @@ def detect_text(path):
                     Sum.append(text.description)
         except:
             continue
-
+    print(Sum)
     n_sum = process_string(Sum)
     return [max(n_sum), date_process(date), detail]
