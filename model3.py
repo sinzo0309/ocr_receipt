@@ -19,7 +19,7 @@ def date_process(date):
                 new_date += date[i - 2 : i + 1]
         except:
             continue
-    print(new_date)
+    # print(new_date)
     return new_date
 
 
@@ -55,25 +55,25 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    print(texts[0].description)
+    # print(texts[0].description)
     date = ""
     flag = True
     F = True
     b = False
     detail = ""
+    pattern = re.compile(r"[ぁ-んァ-ンー]+")
     for text in texts[1:]:
         # print(text.description)
         if b:
-            detail += str(text.description)
+            matches = re.findall(pattern, text.description)
+            result = "".join(matches)
+            detail += str(result) + ","
         if (
             "合計" in text.description
             or "消費税" in text.description
             or "合" in text.description
         ) and F:
             F = False
-            print("############")
-            print(text.description)
-            print("############")
             y1 = text.bounding_poly.vertices[0].y
             y2 = text.bounding_poly.vertices[2].y
             b = False
@@ -103,7 +103,6 @@ def detect_text(path):
                 # print(text.description)
                 result = re.sub(r"\D", "", text.description)
                 Sum.append(result)
-                print(result, "result")
 
                 if "," in text.description:
                     Sum.append(text.description.replace(",", ""))
@@ -116,6 +115,5 @@ def detect_text(path):
         except:
             continue
 
-    print("Sum", Sum)
     n_sum = process_string(Sum)
     return [max(n_sum), date_process(date), detail]
