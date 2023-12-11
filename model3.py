@@ -67,7 +67,8 @@ def detect_text(path):
         if b:
             matches = re.findall(pattern, text.description)
             result = "".join(matches)
-            detail += str(result) + ","
+            if not result == "レジ" and len(result) > 0:
+                detail += str(result) + ","
         if (
             "合計" in text.description
             or "消費税" in text.description
