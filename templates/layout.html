@@ -11,61 +11,19 @@
     
     <body>
         <header class="header-nav-container">
-            <div class="nav-toggle" onclick="toggleNav()">&#9776;</div>
-            <nav class="nav-links">
-                <a class="aa" href="/change_password">パスワードの変更</a>
-                <a class="aa" href="/scan2">スキャンページ</a>
-                <a class="aa" href="/logout">ログアウト</a>
-                <a class="aa" href="/save">データを見る</a>
-                <a class="aa" href="/calender_data">カレンダー</a>
-                <a class="aa" href="/index">ファイル形式で読み込む</a>
-            </nav>
+            <nav><a class="aa" href="/change_password">パスワードを変更する</a></nav>
+            <nav><a class="aa" href="/scan2">スキャン</a></nav>
+            <nav><a class="aa" href="/logout">ログアウト</a></nav>
+            <nav><a class="aa" href="/save">データを見る</a></nav>
+            <nav><a class="aa" href="/calender_data">記録Calender</a></nav>
+            <nav><a class="aa" href="/index">ファイルでアップロード</a></nav>
         </header>
-    
+
         {% block content %}{% endblock %}
-    
         <footer>
             <small>© 2023 片岡慎三</small>
         </footer>
 
-        <script>
-            function toggleNav() {
-                var navLinks = document.querySelector('.nav-links');
-                var navToggle = document.querySelector('.nav-toggle');
-        
-                if (navLinks.style.display === 'block' || navLinks.style.display === '') {
-                    navLinks.style.display = 'none';
-                } else {
-                    navLinks.style.display = 'block';
-                }
-            }
-        </script>
-        
-        
-    
-        <script src="path/to/your/script.js"></script>
-
-        <style>
-            /* Existing styles... */
-        
-            .nav-toggle {
-                font-size: 20px;
-                cursor: pointer;
-                color: white;
-                padding: 5px;
-                margin-right: 10px; /* Add margin for better spacing */
-            }
-        
-            .nav-links {
-                display: flex;
-            }
-    
-        
-            .nav-links a:hover {
-                color: #f00;
-            }
-        </style>
-        
     </body>
     
 </html>
