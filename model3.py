@@ -63,7 +63,7 @@ def detect_text(path):
     detail = ""
     pattern = re.compile(r"[ぁ-んァ-ンー]+")
     for text in texts[1:]:
-        # print(text.description)
+        print(text.description)
         if b:
             matches = re.findall(pattern, text.description)
             result = "".join(matches)
