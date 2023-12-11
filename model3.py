@@ -65,7 +65,11 @@ def detect_text(path):
         # print(text.description)
         if b:
             detail += str(text.description)
-        if ("合計" in text.description or "消費税" in text.description) and F:
+        if (
+            "合計" in text.description
+            or "消費税" in text.description
+            or "合" in text.description
+        ) and F:
             F = False
             print("############")
             print(text.description)
