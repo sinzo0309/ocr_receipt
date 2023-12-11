@@ -73,7 +73,6 @@ def detect_text(path):
         "水",
         "木",
         "土",
-        "大きめ",
         "税込",
         "小計",
         "品",
@@ -87,7 +86,7 @@ def detect_text(path):
         if b:
             # matches = re.findall(pattern, text.description)
             # result = "".join(matches)
-            if text.description in nword and bool(
+            if not text.description in nword and bool(
                 japanese_pattern.search(text.description)
             ):
                 detail += str(text.description) + ","
