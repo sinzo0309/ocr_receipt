@@ -59,8 +59,11 @@ def detect_text(path):
     date = ""
     flag = True
     F = True
+    b = False
     for text in texts[1:]:
         # print(text.description)
+        if b:
+            detail += str(text.description)
         if ("合計" in text.description or "消費税" in text.description) and F:
             F = False
             print("############")
@@ -68,7 +71,9 @@ def detect_text(path):
             print("############")
             y1 = text.bounding_poly.vertices[0].y
             y2 = text.bounding_poly.vertices[2].y
+            b = False
         if ("年" in text.description or "月" in text.description) and flag:
+            b = True
             ydate1 = text.bounding_poly.vertices[0].y
             ydate2 = text.bounding_poly.vertices[2].y
             flag = False
@@ -86,8 +91,6 @@ def detect_text(path):
     detail = ""
 
     for text in texts[10:]:
-        if len(text.description) > 0:
-            detail += str(text.description)
         try:
             if (
                 y1 - 5 <= text.bounding_poly.vertices[0].y <= y2 + 5
