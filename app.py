@@ -361,12 +361,15 @@ def edit(save_id):
         new_cash = request.form.get("cash")
         new_baught_at = request.form.get("baught_at")
         new_detail = request.form.get("detail")
+        new_saved_at = request.form.get("saved_at")
         if request.form["cash"] != save.cash and len(request.form["cash"]) != 0:
             save.cash = new_cash
         if new_baught_at != save.baught_at:
             save.baught_at = new_baught_at
         if new_detail != save.detail:
             save.detail = new_detail
+        if new_saved_at != save.saved_at:
+            save.saved_at = new_saved_at
         db.session.commit()
         return redirect(url_for("save"))
     else:
