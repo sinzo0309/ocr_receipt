@@ -60,6 +60,7 @@ def detect_text(path):
     flag = True
     F = True
     b = False
+    detail = ""
     for text in texts[1:]:
         # print(text.description)
         if b:
@@ -88,7 +89,6 @@ def detect_text(path):
     except:
         pass
     Sum = []
-    detail = ""
 
     for text in texts[10:]:
         try:
