@@ -29,6 +29,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import pytz  # タイムゾーンをインポート
 
+# dbのフィールドを増やしたい時
+# コマンドで、このファイルの階層まで行く
+# もし、「new field」というフィールド名でフィールドを追加するなら
+# コマンド上で
+# flask db migrate -m "Add new field to Save model"
+# flask db upgrade
+# と入力
+
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
@@ -66,6 +74,7 @@ class Save(db.Model):
         db.DateTime, nullable=True, default=datetime.now(pytz.timezone("Asia/Tokyo"))
     )
     baught_at = db.Column(db.String(40), unique=False, nullable=True)
+    detail = db.Column(db.String(40), unique=False, nullable=True)
 
 
 class User(UserMixin, db.Model):
