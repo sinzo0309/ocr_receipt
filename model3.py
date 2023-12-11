@@ -13,20 +13,16 @@ def date_process(date):
         try:
             if term == "年":
                 new_date += date[i - 4 : i + 1]
-                print(new_date)
+
             elif term == "月":
                 new_date += date[i - 2 : i + 1]
-                print(new_date)
+
             elif term == "日":
                 new_date += date[i - 2 : i + 1]
-                print(new_date)
                 break
-            print("date_processの途中")
-            print(new_date)
+
         except:
             continue
-    print("これ")
-    print(new_date)
     return new_date
 
 
