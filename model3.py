@@ -17,6 +17,7 @@ def date_process(date):
                 new_date += date[i - 2 : i + 1]
             elif term == "日":
                 new_date += date[i - 2 : i + 1]
+                break
         except:
             continue
     # print(new_date)
