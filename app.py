@@ -28,6 +28,7 @@ from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import pytz  # タイムゾーンをインポート
+from datetime import timedelta
 
 # dbのフィールドを増やしたい時
 # コマンドで、このファイルの階層まで行く
@@ -48,7 +49,7 @@ import pytz  # タイムゾーンをインポート
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cash.db"
 app.config["SECRET_KEY"] = os.urandom(24)
-# app.config["SESSION_SQLALCHEMY"] = SQLAlchemy(app)
+app.permanent_session_lifetime = timedelta(minutes=30)
 db = SQLAlchemy(app)
 # jsからのPOSTもokにするやつ
 CORS(app, supports_credentials=True)  # これ
@@ -76,7 +77,6 @@ def debug():
 class Save(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     cash = db.Column(db.Integer, unique=False, nullable=False)
-    # username = db.Column(db.String(30), unique=True, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     saved_at = db.Column(
         db.DateTime, nullable=True, default=datetime.now(pytz.timezone("Asia/Tokyo"))
@@ -92,6 +92,23 @@ class User(UserMixin, db.Model):
 
     def change_password(self, new_password):
         self.password = generate_password_hash(new_password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+    def get_id(self):
+        return str(self.id)
+
+    def is_authenticated(self):
+        # Assuming your authentication logic, for example, checking if the user is active
+        return True  # Replace with your authentication logic
+
+    def is_active(self):
+        # Assuming your logic for determining if the user is active
+        return True  # Replace with your logic
+
+    def is_anonymous(self):
+        return False
 
 
 # with app.app_context():
