@@ -138,7 +138,7 @@ def detect_text(path):
             continue
     print(Sum)
     n_sum = process_string(Sum)
-    if max(n_sum)[0] == "4" and max(n_sum)[1:] in Sum:
+    if str(max(n_sum))[0] == "4" and int(str(max(n_sum))[1:]) in Sum:
         return [max(n_sum)[1:], date_process(date), detail]
     else:
         return [max(n_sum), date_process(date), detail]
