@@ -168,8 +168,8 @@ def detect_text(path):
     # 結果を表示
     print("&&&&&&&&&&&&&&&&&")
     for match in matches:
-        if match not in nword:
-            detail += match + ","
+        if match.strip() not in nword:
+            detail += match.strip() + ","
             print(match.strip())
     if str(max(n_sum))[0] == "4" and int(str(max(n_sum))[1:]) in Sum:
         return [max(n_sum)[1:], date_process(date), detail]
