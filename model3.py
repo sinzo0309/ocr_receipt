@@ -101,6 +101,8 @@ def detect_text(path):
         "コード",
         "外",
         "等",
+        "外税",
+        "消費税等合計",
     ]
     temp = ""
     japanese_pattern = re.compile(r"[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]+")
