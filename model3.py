@@ -163,6 +163,12 @@ def detect_text(path):
     print("$$$$$$$$$$$$$$$$$")
     print(temp)
     print("$$$$$$$$$$$$$$$$$")
+    matches = re.findall(r"[^\d¥※%()]+", temp)
+
+    # 結果を表示
+    print("&&&&&&&&&&&&&&&&&")
+    for match in matches:
+        print(match.strip())
     if str(max(n_sum))[0] == "4" and int(str(max(n_sum))[1:]) in Sum:
         return [max(n_sum)[1:], date_process(date), detail]
 
