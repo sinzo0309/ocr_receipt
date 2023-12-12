@@ -163,7 +163,9 @@ def detect_text(path):
         except:
             continue
     print(Sum)
+
     n_sum = process_string(Sum)
+    """
     print("$$$$$$$$$$$$$$$$$")
     print(temp)
     print("$$$$$$$$$$$$$$$$$")
@@ -175,6 +177,7 @@ def detect_text(path):
         if match.strip() not in nword:
             detail += match.strip() + ","
             print(match.strip())
+    """
     if str(max(n_sum))[0] == "4" and int(str(max(n_sum))[1:]) in Sum:
         return [max(n_sum)[1:], date_process(date), detail]
 
