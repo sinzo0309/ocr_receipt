@@ -100,12 +100,14 @@ def detect_text(path):
         "外",
         "等",
     ]
+    temp = ""
     japanese_pattern = re.compile(r"[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]+")
     for text in texts[1:]:
         print(text.description)
         if b:
             # matches = re.findall(pattern, text.description)
             # result = "".join(matches)
+            temp += text.description
             if not text.description in nword and bool(
                 japanese_pattern.search(text.description)
             ):
@@ -158,6 +160,9 @@ def detect_text(path):
             continue
     print(Sum)
     n_sum = process_string(Sum)
+    print("$$$$$$$$$$$$$$$$$")
+    print(temp)
+    print("$$$$$$$$$$$$$$$$$")
     if str(max(n_sum))[0] == "4" and int(str(max(n_sum))[1:]) in Sum:
         return [max(n_sum)[1:], date_process(date), detail]
 
