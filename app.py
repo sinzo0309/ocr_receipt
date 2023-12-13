@@ -318,9 +318,10 @@ def save():
         for detail in details:
             if "No" not in detail and "no" not in detail:
                 matches = re.findall(
-                    r"[0-9]+(?=[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}])",
+                    r"[0-9]+(?=\p{Script=Hiragana})|[0-9]+(?=\p{Script=Katakana})|[0-9]+(?=\p{Script=Han})",
                     detail,
                 )
+
                 if matches:
                     processed_details.append(matches[0])
 
