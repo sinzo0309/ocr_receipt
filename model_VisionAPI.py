@@ -153,7 +153,7 @@ def detect_text(path):
         texts = "".join(texts)
         # bounds = [i[3] for i in line]
         print(texts)
-        if "小計" or "税" in texts:
+        if "小計" in texts:
             T = False
             print("detail終了")
         if T:  # 購入日付と小計の間に購入品目が書かれがち
