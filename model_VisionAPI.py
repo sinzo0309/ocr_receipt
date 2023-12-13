@@ -140,14 +140,14 @@ def detect_text(path):
         texts = "".join(texts)
         # bounds = [i[3] for i in line]
         print(texts)
-        if "年" and "月" and "日" in texts and a:
-            date = texts
-            T = True
-            a = False
         if "小計" in texts:
             T = False
         if T:  # 購入日付と小計の間に購入品目が書かれがち
             detail += " " + texts
+        if "年" and "月" and "日" in texts and a:
+            date = texts
+            T = True
+            a = False
         if "合計" in texts:
             n = gen_cash(texts)
             print("合計", n)
