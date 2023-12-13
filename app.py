@@ -302,14 +302,10 @@ def create():
         return redirect(url_for("save"))  # /saveにリダイレク
 
 
-import regex as re
-
-
 @app.route("/save", methods=["GET", "POST"])
 @login_required
 def save():
     saves = Save.query.filter_by(user_id=current_user.id).all()
-    # processed_saves = []
     print(current_user.username)
     return render_template("save.html", saves=saves)
 
