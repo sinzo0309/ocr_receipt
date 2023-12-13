@@ -120,28 +120,42 @@ def detect_text(path):
     Sum = []
     T = False
     detail = ""
+    textbox = []
+    i = 5
+    F = False
+    a = True
     for line in lines:
         texts = [i[2] for i in line]
         texts = "".join(texts)
         # bounds = [i[3] for i in line]
         print(texts)
-        if "年" and "月" and "日" in texts:
+        if "年" and "月" and "日" in texts and a:
             date = texts
             T = True
+            a = False
         if T:  # 購入日付と小計の間に購入品目が書かれがち
             detail += " " + texts
         if "小計" in texts:
             T = False
         if "合計" in texts:
             Sum = gen_cash(texts)
+            F = True
+        if F and i >= 0:
+            textbox.append(texts)
+            i -= 5
+
+    def check_mark(textbox, sumation):
+        for i in textbox:
+            if sumation in i:
+                return True
+
+        else:
+            return False
 
     print("1##################1")
-    n_sum = Sum
-    if str(max(n_sum))[0] == "4" and int(str(max(n_sum))[1:]) in Sum:
-        return [max(n_sum)[1:], date_process(date), detail]
-
-    elif str(max(n_sum))[0] == "1" and int(str(max(n_sum))[1:]) in Sum:
-        return [max(n_sum)[1:], date_process(date), detail]
-
+    if str(Sum)[0] == "4" and check_mark(textbox, Sum[1:]):
+        return [Sum[1:], date_process(date), detail]
+    elif str(Sum)[0] == "1" and check_mark(textbox, Sum[1:]):
+        return [Sum[1:], date_process(date), detail]
     else:
-        return [max(n_sum), date_process(date), detail]
+        return [Sum, date_process(date), detail]
