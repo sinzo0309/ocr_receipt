@@ -302,7 +302,7 @@ def create():
         return redirect(url_for("save"))  # /saveにリダイレク
 
 
-import re
+import regex as re
 
 
 @app.route("/save", methods=["GET", "POST"])
