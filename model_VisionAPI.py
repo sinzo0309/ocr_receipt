@@ -94,7 +94,7 @@ def process_string(S):
     return result
 
 
-detail = ""
+
 
 
 def detect_text(path):
@@ -117,6 +117,7 @@ def detect_text(path):
     print("1##################1")
     Sum = []
     T = False
+    detail = ""
     for line in lines:
         texts = [i[2] for i in line]
         texts = "".join(texts)
