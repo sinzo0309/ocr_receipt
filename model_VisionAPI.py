@@ -23,6 +23,7 @@ def gen_cash(cash):
             elif len(number) > 0:
                 Sum.append(int(number))
                 number = ""
+
     return max(Sum)  # 合計金額候補の中で、合計金額が購入点数を超えないという仮定の上
 
 
@@ -153,9 +154,9 @@ def detect_text(path):
             return False
 
     print("1##################1")
-    if str(n)[0] == "4" and check_mark(textbox, n[1:]):
-        return [n[1:], date_process(date), detail]
-    elif str(n)[0] == "1" and check_mark(textbox, n[1:]):
-        return [n[1:], date_process(date), detail]
+    if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
+        return [int(str(n[1:])), date_process(date), detail]
+    elif str(n)[0] == "1" and check_mark(textbox, str(n)[1:]):
+        return [int(str(n[1:])), date_process(date), detail]
     else:
         return [n, date_process(date), detail]
