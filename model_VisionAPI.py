@@ -118,7 +118,6 @@ def detect_text(path):
     response = client.text_detection(image=image)
     lines = get_sorted_lines(response)
     print("1##################1")
-    Sum = []
     T = False
     detail = ""
     textbox = []
@@ -140,6 +139,7 @@ def detect_text(path):
             detail += " " + texts
         if "合計" in texts:
             n = gen_cash(texts)
+            print("合計", n)
             F = True
         if F and i >= 0:
             textbox.append(texts)
