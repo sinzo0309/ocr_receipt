@@ -23,7 +23,7 @@ def gen_cash(cash):
             elif len(number) > 0:
                 Sum.append(int(number))
                 number = ""
-
+    print("合計", max(Sum))
     return max(Sum)  # 合計金額候補の中で、合計金額が購入点数を超えないという仮定の上
 
 
