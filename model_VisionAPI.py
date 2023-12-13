@@ -134,10 +134,10 @@ def detect_text(path):
             date = texts
             T = True
             a = False
-        if T:  # 購入日付と小計の間に購入品目が書かれがち
-            detail += " " + texts
         if "小計" in texts:
             T = False
+        if T:  # 購入日付と小計の間に購入品目が書かれがち
+            detail += " " + texts
         if "合計" in texts:
             n = gen_cash(texts)
             F = True
