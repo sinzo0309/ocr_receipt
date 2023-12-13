@@ -29,7 +29,12 @@
                 <ul>
                     {% for i in save.detail.split(" ") %}
                         {% if "No" not in i and "no" not in i %}
-                            <li>{{ i }}</li>
+                            {% if 'Y' in i %}
+                                {% set replaced_i = i | replace('Y', '¥') %}
+                                <li>{{ replaced_i }}</li>
+                            {% else %}
+                                <li>{{ i }}</li>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </ul>
