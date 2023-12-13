@@ -94,6 +94,9 @@ def process_string(S):
     return result
 
 
+detail = ""
+
+
 def detect_text(path):
     """Detects text in the file."""
     try:
