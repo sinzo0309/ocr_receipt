@@ -155,12 +155,15 @@ def detect_text(path):
         print(texts)
         if "小計" or "税" in texts:
             T = False
+            print("detail終了")
         if T:  # 購入日付と小計の間に購入品目が書かれがち
+            print(detail)
             detail += " " + texts
         if "年" and "月" and "日" in texts and a:
             date = texts
             T = True
             a = False
+            print("detail開始")
         if "合計" in texts:
             n = gen_cash(texts)
             print("合計", n)
