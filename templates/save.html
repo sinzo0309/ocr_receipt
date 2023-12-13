@@ -9,11 +9,11 @@
             <th scope="col">購入日時</th>
             <th scope="col">操作</th>
         </tr>
-        {% for save in saves %}
+        {% for save in saves%}
             <tr class="table-primary">
                 <td>{{save.cash}}円</td>
                 <td>{{ save.saved_at }}</td>
-                <td>{{ save.baught_at}}</td>
+                <td>{{ save.baught_at.strftime('%Y年%m月%d日 %H:%M')}}</td>
                 <td>
                     <a href="{{ url_for('edit', save_id=save.id) }}">編集</a>
                     <form method="POST" action="{{ url_for('delete', save_id=save.id) }}" onsubmit="return confirm('削除してもよろしいですか?');">
@@ -27,8 +27,10 @@
                 <td colspan="4">
                 <!-- ここに詳細情報detailを表示 -->
                 <ul>
-                    {% for detail in save.processed_details %}
-                        <li>{{ detail }}</li>
+                    {% for i in save.detail.split(" ") %}
+                        {% if "No" not in i and "no" not in i %}
+                            <li>{{ i }}</li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
                 </td>

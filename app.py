@@ -309,9 +309,10 @@ import regex as re
 @login_required
 def save():
     saves = Save.query.filter_by(user_id=current_user.id).all()
-    processed_saves = []
-
+    # processed_saves = []
+    """
     for save in saves:
+        print(save)
         details = save.detail.split(" ")
         processed_details = []
 
@@ -322,8 +323,13 @@ def save():
                     detail,
                 )
 
-                if matches:
-                    processed_details.append(matches[0])
+                non_matches = re.split(
+                    r"[0-9]+(?=\p{Script=Hiragana})|[0-9]+(?=\p{Script=Katakana})|[0-9]+(?=\p{Script=Han})",
+                    detail,
+                )
+                non_matches = [part.strip() for part in non_matches if part.strip()]
+                if non_matches:
+                    processed_details.append(non_matches)
 
         processed_saves.append(
             {
@@ -333,10 +339,11 @@ def save():
             }
         )
 
-    return render_template("save.html", saves=processed_saves)
-    """"""
-    # print(current_user.username)
-    # return render_template("save.html", saves=saves)
+    return render_template("save.html", processed_saves=processed_saves, saves=saves)
+    
+    """
+    print(current_user.username)
+    return render_template("save.html", saves=saves)
 
 
 @login_required
