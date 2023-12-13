@@ -26,7 +26,10 @@
             <tr class="detail-content" id="detail{{save.id}}">
                 <td colspan="4">
                 <!-- ここに詳細情報を表示 -->
-                {{ save.detail }}
+                {% for i in save.detail.split(" ") %}
+                <li>{{ i }}</li>
+                {% endfor %}
+                
                 </td>
             </tr>
             <tr>
