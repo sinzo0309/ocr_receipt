@@ -138,7 +138,7 @@ def detect_text(path):
         if "小計" in texts:
             T = False
         if "合計" in texts:
-            Sum = gen_cash(texts)
+            n = gen_cash(texts)
             F = True
         if F and i >= 0:
             textbox.append(texts)
@@ -153,9 +153,9 @@ def detect_text(path):
             return False
 
     print("1##################1")
-    if str(Sum)[0] == "4" and check_mark(textbox, Sum[1:]):
-        return [Sum[1:], date_process(date), detail]
-    elif str(Sum)[0] == "1" and check_mark(textbox, Sum[1:]):
-        return [Sum[1:], date_process(date), detail]
+    if str(n)[0] == "4" and check_mark(textbox, n[1:]):
+        return [n[1:], date_process(date), detail]
+    elif str(n)[0] == "1" and check_mark(textbox, n[1:]):
+        return [n[1:], date_process(date), detail]
     else:
-        return [Sum, date_process(date), detail]
+        return [n, date_process(date), detail]
