@@ -111,7 +111,7 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     lines = get_sorted_lines(response)
-    print("##################")
+    print("1##################1")
     Sum = []
     T = False
     for line in lines:
@@ -129,7 +129,7 @@ def detect_text(path):
         if "合計" in texts:
             Sum = gen_cash(texts)
 
-    print("##################")
+    print("1##################1")
     n_sum = Sum
     if str(max(n_sum))[0] == "4" and int(str(max(n_sum))[1:]) in Sum:
         return [max(n_sum)[1:], date_process(date), detail]
