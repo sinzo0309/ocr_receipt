@@ -13,10 +13,10 @@ def gen_cash(cash):
     number = ""
     print("%%%%%%%%%%%%%%%%")
     for c in cash:  # 文字列からひとつづつ抜き出す
-        print(c)
-        if c.isdigit:  # 数字の場合
+        print("c", c)
+        if c.isdigit():  # 数字の場合
             number += str(c)
-            print(number)
+            print("number", number)
         else:  # 数字じゃなかった場合
             if c == "," or c == "." or c == " ":
                 continue
