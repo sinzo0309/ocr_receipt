@@ -153,7 +153,7 @@ def detect_text(path):
         texts = "".join(texts)
         # bounds = [i[3] for i in line]
         print(texts)
-        if "小計" in texts:
+        if "小計" in texts or "合計" in texts:
             T = False
             # print("detail終了")
         if T:  # 購入日付と小計の間に購入品目が書かれがち
@@ -175,7 +175,7 @@ def detect_text(path):
     print("1##################1")
     """if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
         return [int(str(n[1:])), date_process(date), detail]"""
-    # print(detail)
+    print(detail)
     detail = gen_detail(detail)
     # print("matchmatchmatch")
     # print(detail)
