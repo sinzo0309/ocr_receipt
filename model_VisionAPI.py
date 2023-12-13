@@ -11,11 +11,16 @@ credentials_data = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 def gen_cash(cash):
     Sum = []
     number = ""
+    print("%%%%%%%%%%%%%%%%")
     for c in cash:  # 文字列からひとつづつ抜き出す
+        print(c)
         if c.isdigit:  # 数字の場合
             number += str(c)
+            print(number)
         else:  # 数字じゃなかった場合
-            if len(number) > 0:
+            if c == "," or c == "." or c == " ":
+                continue
+            elif len(number) > 0:
                 Sum.append(int(number))
                 number = ""
     return max(Sum)  # 合計金額候補の中で、合計金額が購入点数を超えないという仮定の上
@@ -92,9 +97,6 @@ def process_string(S):
         except:
             continue
     return result
-
-
-
 
 
 def detect_text(path):
