@@ -1,19 +1,89 @@
-{% extends "layout.html" %} 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: url("static/image/背景画像.jpg");
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
 
-<div>
-    {% block content %} 
-    <h2 class="center_content">レシートの写真をアップロード</h2>
-    <form action = "/upload" method="POST" enctype="multipart/form-data">
-        <p class="center_content"><input type="file" id = "upload_file" name = "upload_file" multiple="multiple" ></p>
-        <br>
-        <p class="center_content"><input type="submit" value="アップロード" ></p>
-    </form>
-    <!-- <p>Welcome, {{ current_user.username }}!</p> -->
+        .header-nav-container {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+
+        .header-nav-container nav {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #555;
+        }
+
+        .header-nav-container nav div:hover {
+            background-color: #555;
+        }
+
+        .header-nav-container a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            background-color: #007BFF;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            color: rgb(225, 217, 217);
+            flex-grow: 1;
+            padding: 20px;
+        }
+    </style>
+    <title>スキャン簿</title>
+</head>
+<body>
+
+    <header class="header-nav-container">
+        <nav><a class="aa" href="/change_password">パスワードの変更</a></nav>
+        <nav><a class="aa" href="/scan2">スキャン</a></nav>
+        <nav><a class="aa" href="/logout">ログアウト</a></nav>
+        <nav><a class="aa" href="/save">表データ</a></nav>
+        <nav><a class="aa" href="/calender_data">カレンダー</a></nav>
+    </header>
+
+    <div class="main-content">
+        <h1 id='animatedTextH1'></h1>
+        <p id='animatedTextP'></p>
+    </div>
+    <script>
+        const textContainerH1 = document.getElementById('animatedTextH1');
+        const textH1 = 'スキャン簿へようこそ！';
     
-
-    {% endblock %}
-</div>
-
-
-
-
+        textH1.split('').forEach((char, index) => {
+            const charElement = document.createElement('span');
+            charElement.textContent = char;
+            charElement.className = 'letter';
+            charElement.style.animationDelay = `${index * 0.1}s`;
+            textContainerH1.appendChild(charElement);
+        });
+    
+        const textContainerP = document.getElementById('animatedTextP');
+        const textP = 'レシートを読み込んで家計簿を作ろう！';
+    
+        textP.split('').forEach((char, index) => {
+            const charElement = document.createElement('span');
+            charElement.textContent = char;
+            charElement.className = 'letter';
+            charElement.style.animationDelay = `${index * 0.1}s`;
+            textContainerP.appendChild(charElement);
+        });
+    </script>
+    
+</body>
+</html>

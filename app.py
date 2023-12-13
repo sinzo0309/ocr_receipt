@@ -138,7 +138,7 @@ def index():
 @app.route("/index")
 @login_required
 def scan():
-    return render_template("scan2.html")
+    return render_template("index.html")
 
 
 @app.route("/signup", methods=["GET", "POST"])

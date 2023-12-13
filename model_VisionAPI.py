@@ -1,6 +1,7 @@
 import json
 import os
-import re
+
+# import re
 
 from google.cloud import vision
 
@@ -97,11 +98,13 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     lines = get_sorted_lines(response)
+    print("##################")
     for line in lines:
         texts = [i[2] for i in line]
         texts = "".join(texts)
         # bounds = [i[3] for i in line]
         print(texts)
+    print("##################")
     return [1, "12月13日", 1]
     """
     if str(max(n_sum))[0] == "4" and int(str(max(n_sum))[1:]) in Sum:
