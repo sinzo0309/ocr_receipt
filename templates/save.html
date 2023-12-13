@@ -27,7 +27,9 @@
                 <td colspan="4">
                 <!-- ここに詳細情報を表示 -->
                 {% for i in save.detail.split(" ") %}
-                <li>{{ i }}</li>
+                    {% if "No" not in i and "no" not in i %}
+                        <li>{{ i }}</li>
+                    {% endif %}
                 {% endfor %}
                 
                 </td>
