@@ -157,7 +157,6 @@ def detect_text(path):
             i -= 5
 
     print("1##################1")
-    if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
-        return [int(str(n[1:])), date_process(date), detail]
-    else:
-        return [n, date_process(date), detail]
+    """if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
+        return [int(str(n[1:])), date_process(date), detail]"""
+    return [n, date_process(date), detail]
