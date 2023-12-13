@@ -8,14 +8,16 @@ credentials_data = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 
 def gen_detail(detail):
+    print("matchmatchmatch")
     text = ""
     pattern = r"([^\d¥]*)(¥[\d,]+)"
     matches = re.findall(pattern, detail)
     for match in matches:
+        print(match)
         product_name = match[0].strip()
         price = match[1]
         text += "商品名:" + product_name + "価格:" + price + " "
-
+    print("matchmatchmatch")
     return text
 
 
@@ -171,4 +173,6 @@ def detect_text(path):
     """if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
         return [int(str(n[1:])), date_process(date), detail]"""
     detail = gen_detail(detail)
+    print("matchmatchmatch")
+    print(detail)
     return [n, date_process(date), detail]
