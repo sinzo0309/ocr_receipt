@@ -172,6 +172,7 @@ def detect_text(path):
     print("1##################1")
     """if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
         return [int(str(n[1:])), date_process(date), detail]"""
+    print(detail)
     detail = gen_detail(detail)
     print("matchmatchmatch")
     print(detail)
