@@ -202,12 +202,12 @@ def upload_user_files():
             redirect("/upload1")
         else:
             if result[1] == None:
-                print(11111111111)
+                # print(11111111111)
                 return render_template(
                     "result.html", result=result[0], img_path=img_path
                 )
             else:
-                print(22222222222)
+                # print(22222222222)
                 return render_template(
                     "result.html", result=result[0], date=result[1], img_path=img_path
                 )
@@ -226,19 +226,19 @@ def upload2_user_files():
             baught_at = result[1]
             detail = result[2]
             baught_at = date_process(baught_at)
-            print(baught_at, cash)
+            # print(baught_at, cash)
             current_time = datetime.now(pytz.timezone("Asia/Tokyo"))
-            print("###########")
-            print(current_user)
-            print("###########")
+            # print("###########")
+            # print(current_user)
+            # print("###########")
             current_logged_in_user = User.query.filter_by(
                 username=current_user.username
             ).first()
-            print(current_logged_in_user.id)
-            print(int(cash))
-            print(current_time)
-            print(baught_at)
-            print(detail)
+            # print(current_logged_in_user.id)
+            # print(int(cash))
+            # print(current_time)
+            ##print(baught_at)
+            # print(detail)
             if baught_at != None:
                 save = Save(
                     # user_id=current_user.id,
@@ -310,38 +310,6 @@ import regex as re
 def save():
     saves = Save.query.filter_by(user_id=current_user.id).all()
     # processed_saves = []
-    """
-    for save in saves:
-        print(save)
-        details = save.detail.split(" ")
-        processed_details = []
-
-        for detail in details:
-            if "No" not in detail and "no" not in detail:
-                matches = re.findall(
-                    r"[0-9]+(?=\p{Script=Hiragana})|[0-9]+(?=\p{Script=Katakana})|[0-9]+(?=\p{Script=Han})",
-                    detail,
-                )
-
-                non_matches = re.split(
-                    r"[0-9]+(?=\p{Script=Hiragana})|[0-9]+(?=\p{Script=Katakana})|[0-9]+(?=\p{Script=Han})",
-                    detail,
-                )
-                non_matches = [part.strip() for part in non_matches if part.strip()]
-                if non_matches:
-                    processed_details.append(non_matches)
-
-        processed_saves.append(
-            {
-                "id": save.id,
-                "processed_details": processed_details,
-                # Add other save attributes as needed
-            }
-        )
-
-    return render_template("save.html", processed_saves=processed_saves, saves=saves)
-    
-    """
     print(current_user.username)
     return render_template("save.html", saves=saves)
 

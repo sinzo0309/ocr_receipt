@@ -8,28 +8,28 @@ credentials_data = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 
 def gen_detail(detail):
-    print("matchmatchmatch")
+    # print("matchmatchmatch")
     text = ""
     pattern = r"([^\d¥]*)(¥[\d,]+)"
     matches = re.findall(pattern, detail)
     for match in matches:
-        print(match)
+        # print(match)
         product_name = match[0].strip()
         price = match[1]
         text += "商品名:" + product_name + "価格:" + price + " "
-    print("matchmatchmatch")
+    # print("matchmatchmatch")
     return text
 
 
 def gen_cash(cash):
     Sum = []
     number = ""
-    print("%%%%%%%%%%%%%%%%")
+    # print("%%%%%%%%%%%%%%%%")
     for c in cash:  # 文字列からひとつづつ抜き出す
-        print("c", c)
+        # print("c", c)
         if c.isdigit():  # 数字の場合
             number += str(c)
-            print("number", number)
+            # print("number", number)
         else:  # 数字じゃなかった場合
             if c == "," or c == "." or c == " ":
                 continue
@@ -38,7 +38,7 @@ def gen_cash(cash):
                 number = ""
     if number:
         Sum.append(int(number))
-    print("合計", max(Sum))
+    # print("合計", max(Sum))
     return max(Sum)  # 合計金額候補の中で、合計金額が購入点数を超えないという仮定の上
 
 
@@ -141,7 +141,7 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     lines = get_sorted_lines(response)
-    print("1##################1")
+    # print("1##################1")
     T = False
     detail = ""
     textbox = []
@@ -152,31 +152,31 @@ def detect_text(path):
         texts = [i[2] for i in line]
         texts = "".join(texts)
         # bounds = [i[3] for i in line]
-        print(texts)
+        # print(texts)
         if "小計" in texts:
             T = False
-            print("detail終了")
+            # print("detail終了")
         if T:  # 購入日付と小計の間に購入品目が書かれがち
-            print(detail)
+            # print(detail)
             detail += " " + texts
         if "年" and "月" and "日" in texts and a:
             date = texts
             T = True
             a = False
-            print("detail開始")
+            # print("detail開始")
         if "合計" in texts:
             n = gen_cash(texts)
-            print("合計", n)
+            # print("合計", n)
             F = True
         if F and i >= 0:
             textbox.append(texts)
             i -= 5
 
-    print("1##################1")
+    # print("1##################1")
     """if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
         return [int(str(n[1:])), date_process(date), detail]"""
-    print(detail)
+    # print(detail)
     detail = gen_detail(detail)
-    print("matchmatchmatch")
-    print(detail)
+    # print("matchmatchmatch")
+    # print(detail)
     return [n, date_process(date), detail]
