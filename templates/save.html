@@ -12,7 +12,7 @@
         {% for save in saves %}
             <tr class="table-primary">
                 <td>{{save.cash}}円</td>
-                <td>{{ save.saved_at.strftime('%Y年%m月%d日 %H:%M') }}</td>
+                <td>{{ save.saved_at }}</td>
                 <td>{{ save.baught_at}}</td>
                 <td>
                     <a href="{{ url_for('edit', save_id=save.id) }}">編集</a>
