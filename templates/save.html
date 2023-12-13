@@ -26,12 +26,11 @@
             <tr class="detail-content" id="detail{{save.id}}">
                 <td colspan="4">
                 <!-- ここに詳細情報を表示 -->
-                {% for i in save.detail.split(" ") %}
-                    {% if "No" not in i and "no" not in i %}
-                        <li>{{ i }}</li>
-                    {% endif %}
+                {% for line in data.split("\n") %}
+                {% if line %}
+                    <li>{{ line.split(" ", 1)[1] }}</li>
+                {% endif %}
                 {% endfor %}
-                
                 </td>
             </tr>
             <tr>
