@@ -302,12 +302,40 @@ def create():
         return redirect(url_for("save"))  # /saveにリダイレク
 
 
+import re
+
+
 @app.route("/save", methods=["GET", "POST"])
 @login_required
 def save():
     saves = Save.query.filter_by(user_id=current_user.id).all()
-    print(current_user.username)
-    return render_template("save.html", saves=saves)
+    processed_saves = []
+
+    for save in saves:
+        details = save.detail.split(" ")
+        processed_details = []
+
+        for detail in details:
+            if "No" not in detail and "no" not in detail:
+                matches = re.findall(
+                    r"[0-9]+(?=[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}])",
+                    detail,
+                )
+                if matches:
+                    processed_details.append(matches[0])
+
+        processed_saves.append(
+            {
+                "id": save.id,
+                "processed_details": processed_details,
+                # Add other save attributes as needed
+            }
+        )
+
+    return render_template("save.html", saves=processed_saves)
+    """"""
+    # print(current_user.username)
+    # return render_template("save.html", saves=saves)
 
 
 @login_required
