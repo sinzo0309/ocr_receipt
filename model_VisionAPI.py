@@ -81,6 +81,15 @@ def date_process(date):
     return new_date
 
 
+def check_mark(textbox, sumation):
+    for i in textbox:
+        if sumation in i:
+            return True
+
+    else:
+        return False
+
+
 def process_string(S):
     result = []
 
@@ -144,14 +153,6 @@ def detect_text(path):
         if F and i >= 0:
             textbox.append(texts)
             i -= 5
-
-    def check_mark(textbox, sumation):
-        for i in textbox:
-            if sumation in i:
-                return True
-
-        else:
-            return False
 
     print("1##################1")
     if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
