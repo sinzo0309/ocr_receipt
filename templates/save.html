@@ -26,11 +26,16 @@
             <tr class="detail-content" id="detail{{save.id}}">
                 <td colspan="4">
                 <!-- ここに詳細情報を表示 -->
-                {% for line in data.split("\n") %}
-                {% if line %}
-                    <li>{{ line.split(" ", 1)[1] }}</li>
-                {% endif %}
-                {% endfor %}
+                <ul>
+                    {% for i in save.detail.split(" ") %}
+                    {% if "No" not in i and "no" not in i %}
+                        {% set match = i | regex_findall('[0-9]+(?=[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}])') %}
+                        {% if match %}
+                            <li>{{ match[0] }}</li>
+                        {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </ul>
                 </td>
             </tr>
             <tr>
