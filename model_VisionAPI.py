@@ -1,11 +1,22 @@
 import json
 import os
-
-# import re
+import re
 
 from google.cloud import vision
 
 credentials_data = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+
+
+def gen_detail(detail):
+    text = ""
+    pattern = r"([^\d¥]*)(¥[\d,]+)"
+    matches = re.findall(pattern, detail)
+    for match in matches:
+        product_name = match[0].strip()
+        price = match[1]
+        text += "商品名:" + product_name + "価格:" + price + " "
+
+    return text
 
 
 def gen_cash(cash):
@@ -159,4 +170,5 @@ def detect_text(path):
     print("1##################1")
     """if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
         return [int(str(n[1:])), date_process(date), detail]"""
+    detail = gen_detail(detail)
     return [n, date_process(date), detail]
