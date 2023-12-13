@@ -8,6 +8,19 @@ from google.cloud import vision
 credentials_data = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 
+def gen_cash(cash):
+    Sum = []
+    number = ""
+    for c in cash:  # 文字列からひとつづつ抜き出す
+        if c.isdigit:  # 数字の場合
+            number += str(c)
+        else:  # 数字じゃなかった場合
+            if len(number) > 0:
+                Sum.append(int(number))
+                number = ""
+    return max(Sum)  # 合計金額候補の中で、合計金額が購入点数を超えないという仮定の上
+
+
 def get_sorted_lines(response):
     document = response.full_text_annotation
     bounds = []
@@ -99,14 +112,25 @@ def detect_text(path):
     response = client.text_detection(image=image)
     lines = get_sorted_lines(response)
     print("##################")
+    Sum = []
+    T = False
     for line in lines:
         texts = [i[2] for i in line]
         texts = "".join(texts)
         # bounds = [i[3] for i in line]
         print(texts)
+        if "年" and "月" and "日" in texts:
+            date = texts
+            T = True
+        if T:  # 購入日付と小計の間に購入品目が書かれがち
+            detail += " " + texts
+        if "小計" in texts:
+            T = False
+        if "合計" in texts:
+            Sum = gen_cash(texts)
+
     print("##################")
-    return [1, "12月13日", 1]
-    """
+    n_sum = Sum
     if str(max(n_sum))[0] == "4" and int(str(max(n_sum))[1:]) in Sum:
         return [max(n_sum)[1:], date_process(date), detail]
 
@@ -115,4 +139,3 @@ def detect_text(path):
 
     else:
         return [max(n_sum), date_process(date), detail]
-    """
