@@ -141,7 +141,7 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     lines = get_sorted_lines(response)
-    # print("1##################1")
+    print("1##################1")
     T = False
     detail = ""
     textbox = []
@@ -152,7 +152,7 @@ def detect_text(path):
         texts = [i[2] for i in line]
         texts = "".join(texts)
         # bounds = [i[3] for i in line]
-        # print(texts)
+        print(texts)
         if "小計" in texts:
             T = False
             # print("detail終了")
@@ -172,7 +172,7 @@ def detect_text(path):
             textbox.append(texts)
             i -= 5
 
-    # print("1##################1")
+    print("1##################1")
     """if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
         return [int(str(n[1:])), date_process(date), detail]"""
     # print(detail)
