@@ -51,6 +51,8 @@ def detect_text(path):
         credentials = json.loads(credentials_data)
         client = vision.ImageAnnotatorClient.from_service_account_info(credentials)
     except Exception as e:
+        print("credentials error")
+        print(e)
         return None
 
     with open(path, "rb") as image_file:
@@ -60,13 +62,13 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    # print(texts[0].description)
+    print(texts[0].description)
     date = ""
     flag = True
     F = True
     b = False
     detail = ""
-    pattern = re.compile(r"[ぁ-んァ-ンー]+")
+    # pattern = re.compile(r"[ぁ-んァ-ンー]+")
     nword = [
         "月",
         "日",

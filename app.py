@@ -12,7 +12,8 @@ from flask import (
 )
 from flask_cors import CORS
 
-from model3 import detect_text, date_process
+# from model3 import detect_text, date_process
+from model_VisionAPI import detect_text, date_process
 
 # from model_teseract import detect_text, date_process
 from flask_sqlalchemy import SQLAlchemy
