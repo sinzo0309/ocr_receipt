@@ -2,14 +2,16 @@
 {% block content %} 
 
     <body>
-    <video id="video" width="300" height="720" autoplay></video>
-    <button id="snap">スキャンはここをクリック</button>
-    <canvas id="canvas" width="300" height="720"></canvas>
+        <div style="display: flex; justify-content: space-between;">
+            <video id="video" width="400" height="720" autoplay></video>
+            <button id="snap" style="width: 200px; height: 72px; background-color: #b2d8d8; border-radius: 15px; border: none; color: white; font-size: 20px; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); margin-top: 300px;">スキャンはここをクリック</button>
+            <canvas id="canvas" width="400" height="720"></canvas>
+        </div>
 
     </body>
     <script>
     // カメラの設定
-    var constraints = { video: { width: 300, height: 720 } }; 
+    var constraints = { video: { width: 400, height: 720 } }; 
     
     // video要素の取得
     var video = document.querySelector('#video');
@@ -28,12 +30,11 @@
     var canvas = document.querySelector('#canvas');
     var context = canvas.getContext('2d');
     var snap = document.querySelector("#snap");
-    var scan = document.querySelector("#scan");
 
     // ...
 
     snap.addEventListener("click", function() {
-    context.drawImage(video, 0, 0, 300, 720);
+    context.drawImage(video, 0, 0, 400, 720);
     canvas.toBlob(function(blob) {
         var formData = new FormData();
         formData.append('upload_file', blob, 'レシート.png');
@@ -59,10 +60,6 @@
     }, 'image/png');
     });
 
-
-
-
     </script>
 
 {% endblock %}
-
