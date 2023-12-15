@@ -5,14 +5,38 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="static\css\style_calender.css">
+        <link href="https://css.gg/css" rel="stylesheet">
         <title>スキャン簿</title>
     </head>
     <body>
         <header class="header-nav-container">
-            <nav><a class="aaa" href="/scan2">スキャン</a></nav>
-            <nav><a a class="aaa" href="/logout">ログアウト</a></nav>
-            <nav><a a class="aaa" href="/save">表示をデータ</a></nav>
-            <nav><a class="aaa" href="/index">ホーム</a></nav>
+            <nav><a class="aaa" href="/index" style="display: flex; align-items: center; flex-direction: row;"><i class="gg-home-alt"></i>
+            　ホーム
+            </a></nav>
+            <nav>
+                <a class="aaa" href="/scan2" style="display: flex; align-items: center; flex-direction: row;"><i class="gg-camera"></i>　スキャン
+                </a>
+            </nav>
+            <a class="aaa" href="/save" style="display: flex; align-items: center; flex-direction: row;">
+                <i class="gg-view-comfortable"></i>
+                　表データ　
+            </a>
+            <nav><a class="aaa" href="/calender_data" style="display: flex; align-items: center; flex-direction: row;">
+                <i class="gg-calendar-dates"></i>
+                　カレンダー
+            </a></nav>
+            <nav>
+                <a class="aaa" href="/change_password" style="display: flex; align-items: center; flex-direction: row;">
+                    <i class="gg-options"></i>
+                    　設定　
+                </a>
+            </nav>
+            <nav>
+                <a class="aaa" href="/logout" style="display: flex; align-items: center; flex-direction: row;">
+                    <i class="gg-log-out"></i>
+                    　ログアウト
+                </a>
+            </nav>
         </header>
 
         {% block content %}{% endblock %}

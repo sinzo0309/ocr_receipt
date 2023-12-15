@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://css.gg/css" rel="stylesheet">
+
     <style>
         body {
             background-image: url("static/image/背景画像.jpg");
@@ -37,14 +39,19 @@
         }
 
         .header-nav-container a {
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;  
             text-decoration: none;
             color: #000;
             font-size: 18px;
             background-color: #87CEFA;
             display: block;
             padding: 10px;
-            border-radius: 5px;
-        }
+            border-radius: 5px; }
+        
 
         .main-content {
             color: rgb(225, 217, 217);
@@ -64,7 +71,11 @@
             font-size: 18px;
             text-decoration: none;
         }
+        .aa i {
+        margin: 5px;
+        }
     </style>
+
     <title>スキャン簿</title>
 </head>
 <body>
@@ -72,14 +83,34 @@
     <div class="main-content">
         <h1 id='animatedTextH1'></h1>
         <p id='animatedTextP'></p>
-        <a href="/scan2" class="scan-button">スキャン</a>
+        <a href="/scan2" class="scan-button" style="display: flex; align-items: center; flex-direction: row; "><i class="gg-camera"></i>　　　　スキャン</a>
     </div>
 
     <header class="header-nav-container">
-        <nav><a class="aa" href="/change_password">設定</a></nav>
-        <nav><a class="aa" href="/logout">ログアウト</a></nav>
-        <nav><a class="aa" href="/save">表データ</a></nav>
-        <nav><a class="aa" href="/calender_data">カレンダー</a></nav>
+        <nav>
+            <a class="aa" href="/save" style="display: flex; align-items: center; flex-direction: row;">
+                <i class="gg-view-comfortable"></i>
+                　表データ
+            </a>
+        </nav>
+        <nav>
+            <a class="aa" href="/calender_data" style="display: flex; align-items: center; flex-direction: row;">
+                <i class="gg-calendar-dates"></i>
+                　カレンダー
+            </a>
+        </nav>
+        <nav>
+            <a class="aa" href="/change_password" style="display: flex; align-items: center; flex-direction: row;">
+                <i class="gg-options"></i>
+                　設定
+            </a>
+        </nav>
+        <nav>
+            <a class="aa" href="/logout" style="display: flex; align-items: center; flex-direction: row;">
+                <i class="gg-log-out"></i>
+                　ログアウト
+            </a>
+        </nav>
     </header>
 
     <script>
