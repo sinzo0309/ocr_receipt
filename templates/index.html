@@ -7,7 +7,7 @@
 
     <style>
         body {
-            background-image: url("static/image/背景画像.jpg");
+            background-color:   #87CEFA;
             margin: 0;
             font-family: Arial, sans-serif;
             display: flex;
@@ -28,18 +28,19 @@
         }
 
         .header-nav-container nav {
-            padding: 15px;
+            /* padding: 15px; */
+            background-color:white;
             text-align: center;
             border-bottom: 1px solid #555;
             margin: 10px;
         }
 
-        .header-nav-container nav:hover {
+
+        /* .header-nav-container nav:hover { 
             background-color: #555;
-        }
+        }*/
 
         .header-nav-container a {
-            box-sizing: border-box;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -47,24 +48,31 @@
             text-decoration: none;
             color: #000;
             font-size: 18px;
-            background-color: #87CEFA;
-            display: block;
+            background-color: white;
             padding: 10px;
             border-radius: 5px; }
         
+        .header-nav-container a:hover {
+            background-color: #555;
+            border-radius: 10px; /* ここで角丸の大きさを調整できます */
+        }
 
         .main-content {
-            color: rgb(225, 217, 217);
+            color:white;
             text-align: center;
             padding: 20px;
+        }
+
+        .main-content a:hover{
+            background-color: #555;
         }
 
         .scan-button {
             display: block;
             width: 66%;
             padding: 20px;
-            background-color: #87CEFA;
-            color: #000;
+            background-color:black;
+            color:white;
             text-align: center;
             margin: 20px auto;
             border-radius: 5px;
@@ -73,6 +81,7 @@
         }
         .aa i {
         margin: 5px;
+        
         }
     </style>
 
@@ -83,7 +92,7 @@
     <div class="main-content">
         <h1 id='animatedTextH1'></h1>
         <p id='animatedTextP'></p>
-        <a href="/scan2" class="scan-button" style="display: flex; align-items: center; flex-direction: row; "><i class="gg-camera"></i>　　　　スキャン</a>
+        <a href="/scan2" class="scan-button" style="display: flex; align-items: center; flex-direction: row; color:white"><i class="gg-camera"></i>　　　　スキャン</a>
     </div>
 
     <header class="header-nav-container">

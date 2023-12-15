@@ -21,14 +21,12 @@
     color: #87CEFA;
     text-decoration: none;}
     
-    
 .aaa:hover {
     color: #f00;}
 
 body {
-    background-color: #fafafa;
+    
     font-family: 'Arial', sans-serif;
-    background-image: url("../image/背景画像.jpg");
     padding-top: 40px;  /* 追加 */
 }
 

@@ -15,7 +15,8 @@
   }
 
 body {
-  background-image: url("../image/背景画像.jpg");
+  /* background-image: url("../image/背景画像1.jpg"); */
+  background-color:  #87CEFA;
 }
   
 nav {
