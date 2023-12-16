@@ -149,6 +149,7 @@ def detect_text(path):
     F = False
     a = True
     before_texts = ""
+    S = False
     for j, line in enumerate(lines):
         texts = [i[2] for i in line]
         texts = "".join(texts)
