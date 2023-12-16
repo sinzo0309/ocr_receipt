@@ -192,6 +192,9 @@ def logout():
 @login_required
 @app.route("/upload", methods=["GET", "POST"])
 def upload_user_files():
+    print("##############")
+    print(current_user)
+    print("##############")
     if request.method == "POST":
         upload_file = request.files["upload_file"]
         img_path = os.path.join(UPLOAD_FOLDER, upload_file.filename)
@@ -216,6 +219,9 @@ def upload_user_files():
 @login_required
 @app.route("/upload2", methods=["GET", "POST"])
 def upload2_user_files():
+    print("##############")
+    print(current_user)
+    print("##############")
     try:
         if request.method == "POST":
             upload_file = request.files["upload_file"]
@@ -275,6 +281,9 @@ def upload2_user_files():
 @app.route("/create", methods=["GET", "POST"])
 @login_required
 def create():
+    print("##############")
+    print(current_user)
+    print("##############")
     if request.method == "POST":
         result = int(request.form.get("result"))
         baught_at = request.form.get("baught_at")
@@ -305,6 +314,9 @@ def create():
 @app.route("/save", methods=["GET", "POST"])
 @login_required
 def save():
+    print("##############")
+    print(current_user)
+    print("##############")
     saves = Save.query.filter_by(user_id=current_user.id).all()
     print(current_user.username)
     return render_template("save.html", saves=saves)
@@ -313,6 +325,9 @@ def save():
 @login_required
 @app.route("/calender_data")
 def calendar_data():
+    print("##############")
+    print(current_user)
+    print("##############")
     try:
         events = Save.query.filter_by(user_id=current_user.id).all()
 
@@ -395,6 +410,9 @@ def edit(save_id):
 @login_required
 @app.route("/scan2")
 def scan2():
+    print("##############")
+    print(current_user)
+    print("##############")
     return render_template("scan2.html")
 
 
@@ -402,6 +420,9 @@ def scan2():
 @login_required
 @app.route("/change_password", methods=["GET", "POST"])
 def change_password():
+    print("##############")
+    print(current_user)
+    print("##############")
     if request.method == "POST":
         current_password = request.form.get("current_password")
         new_password = request.form.get("new_password")
