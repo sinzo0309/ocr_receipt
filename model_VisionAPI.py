@@ -148,7 +148,8 @@ def detect_text(path):
     i = 5
     F = False
     a = True
-    for line in lines:
+    before_texts = ""
+    for j, line in enumerate(lines):
         texts = [i[2] for i in line]
         texts = "".join(texts)
         # bounds = [i[3] for i in line]
@@ -165,12 +166,16 @@ def detect_text(path):
             a = False
             # print("detail開始")
         if "合計" in texts:
-            n = gen_cash(texts)
+            # n = gen_cash(texts)
             # print("合計", n)
-            F = True
-        if F and i >= 0:
-            textbox.append(texts)
-            i -= 5
+            S = True
+        if S:
+            after_texts = "".join([i[2] for i in lines[j + 1]])
+            Texts = before_texts + ":" + texts + ":" + after_texts
+            n = gen_cash(Texts)
+            S = False
+
+        before_texts = texts
 
     print("1##################1")
     """if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):

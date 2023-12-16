@@ -318,7 +318,7 @@ def save():
     print(current_user)
     print("##############")
     saves = Save.query.filter_by(user_id=current_user.id).all()
-    print(current_user.username)
+    # print(current_user.username)
     return render_template("save.html", saves=saves)
 
 
