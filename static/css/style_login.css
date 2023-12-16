@@ -1,8 +1,9 @@
   body {
     display: flex;
     min-height: 100vh;
+    background-image:url(../image/背景画像.jpg);
     /* background-image: url("../image/背景画像1.jpg"); */
-    background-color:  #87CEFA;
+    /* background-color:  #87CEFA; */
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -26,7 +27,8 @@ label{
 /* 新しいクラスを追加してアニメーションを設定 */
 .animated-text {
   font-size: 60px;
-  color: rgb(9, 1, 1);
+  color:#87CEFA;
+  /* color: rgb(9, 1, 1); */
   font-weight: bold; /* 太字 */
   font-style: italic; /* 斜体 */
   white-space: nowrap;

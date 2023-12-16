@@ -17,11 +17,11 @@
   <div id="loginForm">
     <form action="/login" method="POST">
       <div>
-        <label for="username">ユーザー名</label>
+        <label for="username" style="color:white;">ユーザー名</label>
         <input type="text" name="username">
         <br>
         <br>
-        <label for="password">パスワード</label>
+        <label for="password" style="color:white;">パスワード</label>
         <input type="password" name="password">
 
         <input type="submit" name="password" value="ログイン">
@@ -30,7 +30,7 @@
   </div>
   <br>
   <!-- 新規登録のリンク（ボタン） -->
-  <a href="/signup" id="signupButton" style="color: black;">新規登録</a>
+  <a href="/signup" id="signupButton" style="color:white;">新規登録</a>
   {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class=flashes>

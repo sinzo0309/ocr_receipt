@@ -11,7 +11,8 @@
 }
 
 body {
-  background-color: #87CEFA;
+  background-image:url(../image/背景画像.jpg);
+  /* background-color: #87CEFA; */
   /* background-image: url("../image/背景画像1.jpg");  */
   color: #eae2e2;
 }
