@@ -167,16 +167,10 @@ def detect_text(path):
             a = False
             # print("detail開始")
         if "合計" in texts:
-            # n = gen_cash(texts)
+            n = gen_cash(texts)
             # print("合計", n)
-            S = True
-        if S:
-            after_texts = "".join([i[2] for i in lines[j + 1]])
-            Texts = before_texts + ":" + texts + ":" + after_texts
-            n = gen_cash(Texts)
-            S = False
 
-        before_texts = texts
+        # before_texts = texts
 
     print("1##################1")
     """if str(n)[0] == "4" and check_mark(textbox, str(n)[1:]):
@@ -186,3 +180,13 @@ def detect_text(path):
     # print("matchmatchmatch")
     # print(detail)
     return [n, date_process(date), detail]
+
+
+"""
+        S = True
+        if S:
+            after_texts = "".join([i[2] for i in lines[j + 1]])
+            Texts = before_texts + ":" + texts + ":" + after_texts
+            n = gen_cash(Texts)
+            S = False
+        """
