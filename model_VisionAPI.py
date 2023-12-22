@@ -58,7 +58,7 @@ def get_sorted_lines(response):
     old_y = -1
     line = []
     lines = []
-    threshold = 1
+    threshold = 2
     for bound in bounds:
         x = bound[0]
         y = bound[1]
