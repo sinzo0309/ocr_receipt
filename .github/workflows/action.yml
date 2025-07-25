@@ -1,0 +1,15 @@
+name: Monthly Calendar Sync
+
+on:
+  schedule:
+    # 毎月1日に実行
+    - cron: '0 0 1 * *'
+
+jobs:
+  calendar_sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3.6.0
+
